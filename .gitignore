@@ -1,0 +1,97 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnp/
+.pnp.js
+
+# Runtime / logs
+logs/
+*.log
+*.pid
+*.seed
+*.pid.lock
+lerna-debug.log*
+
+# Build / output
+dist/
+build/
+out/
+tmp/
+temp/
+release/
+*.tgz
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Environment files (keep examples in repo)
+.env
+.env.*.local
+!.env.example
+
+config/*
+
+# Frontend frameworks / tools
+.cache/
+.vite/
+.parcel-cache/
+.next/
+.webpack/
+public/build/
+
+# Database / local data
+data/
+data/db/
+dump/
+*.sqlite
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Misc
+coverage/
+npm-packages-offline-cache/
+node_repl_history
+.yarn-integrity
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+
+# Python / automation
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+pip-wheel-metadata/
+pip-selfcheck.json
+.python-version
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+.pytype/
+htmlcov/
+.coverage
+.coverage.*
+.ropeproject/
