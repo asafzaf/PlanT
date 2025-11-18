@@ -24,5 +24,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
+
+  "paths": {
+    "@shared/*": ["../../shared/*"],
+    "@types/*": ["../../shared/types/*"],
+    "@utils/*": ["../../shared/utils/*"]
+  },
+  
   "include": ["src"]
 }
