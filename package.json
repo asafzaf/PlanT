@@ -1,18 +1,13 @@
 {
-  "name": "plant",
+  "name": "plant-monorepo-tools",
   "version": "1.0.0",
-  "description": "MERN stack monorepo with frontend (`app`), backend (`core`), and future microservices (`services`).  \r TypeScript, Docker, Nginx, and multi-environment setup (dev, stage, prod).",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "private": true,
   "devDependencies": {
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }
