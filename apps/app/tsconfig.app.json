@@ -31,5 +31,5 @@
     "@utils/*": ["../../shared/utils/*"]
   },
   
-  "include": ["src", "../core/src/config"]
+  "include": ["src", "../core/src/config", "../core/src/utils/logger.conf.ts"]
 }

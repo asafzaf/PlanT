@@ -12,6 +12,7 @@
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["shared/*"],
+      "@types": ["shared/types"],
       "@types/*": ["shared/types/*"],
       "@utils/*": ["shared/utils/*"]
     },
