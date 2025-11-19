@@ -5,7 +5,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["vite/client"],
+    "types": ["vite/client", "node"],
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -31,5 +31,5 @@
     "@utils/*": ["../../shared/utils/*"]
   },
   
-  "include": ["src"]
+  "include": ["src", "../core/src/config"]
 }
