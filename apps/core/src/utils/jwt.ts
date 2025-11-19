@@ -1,4 +1,4 @@
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import env from "../config/config.env";
 
 export interface JwtPayload {
