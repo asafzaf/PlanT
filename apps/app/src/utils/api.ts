@@ -1,19 +1,26 @@
-import axios from 'axios';
-import config from '../../../core/src/config/config.env';
+import axios from "axios";
+
+console.log("API URL:", import.meta.env.VITE_REACT_APP_API_URL);
+
+const API_URL =
+  import.meta.env.VITE_REACT_APP_API_URL || "http://localhost:80/api";
+
+
+console.log("Using API URL:", API_URL);
 
 const baseApi = axios.create({
-  baseURL: config.app.baseUrl,
+  baseURL: API_URL,
   timeout: 10000,
 });
 
 const authApi = axios.create({
-  baseURL: config.app.baseUrl,
+  baseURL: API_URL,
   timeout: 10000,
-  withCredentials: true,  
+  withCredentials: true,
 });
 
 authApi.interceptors.request.use((request) => {
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem("authToken");
   if (token) {
     request.headers.Authorization = `Bearer ${token}`;
   }

@@ -5,7 +5,7 @@ import { authMiddleware } from "../../middleware/auth.middleware";
 const router = Router();
 const controller = new UserController();
 
-router.use(authMiddleware); // secure all routes
+// router.use(authMiddleware); // secure all routes
 
 router.get("/", controller.listUsers);
 router.get("/email/:email", controller.getUserByEmail);

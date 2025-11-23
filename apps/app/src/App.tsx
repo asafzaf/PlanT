@@ -3,8 +3,17 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+import { useUsers } from './hooks/userHook.ts';
+
 function App() {
   const [count, setCount] = useState(0)
+
+  const { data: users, error, isLoading } = useUsers();
+  if (isLoading) return <div>Loading users...</div>;
+  if (error) return <div>Error loading users: {error.message}</div>;
+
+  console.log("Fetched users:", users);
+
 
   return (
     <>

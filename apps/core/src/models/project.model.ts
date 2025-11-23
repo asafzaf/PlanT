@@ -1,5 +1,6 @@
-import { IProject } from "@types";
+import { IProject, IProjectCreateDTO, IProjectUpdateDTO } from "@types";
 import { Schema, Model, model, Document } from "mongoose";
+import CounterService from "../utils/counter.service";
 
 export interface IProjectDB extends IProject, Document {}
 
@@ -26,4 +27,40 @@ export const ProjectSchema = new Schema<IProjectDB, IProjectModel>(
     isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
+);
+
+ProjectSchema.statics.createProject = async function (
+  data: IProjectCreateDTO
+): Promise<IProjectDB> {
+  const internalId = await CounterService.nextId("Project");
+  const project = new this({ ...data, internalId });
+  return project.save();
+};
+
+ProjectSchema.statics.listProjects = function (): Promise<IProjectDB[]> {
+  return this.find().exec();
+};
+
+ProjectSchema.statics.getProjectByInternalId = function (
+  internalId: string
+): Promise<IProjectDB | null> {
+  return this.findOne({ internalId }).exec();
+};
+
+ProjectSchema.statics.updateProjectInternalId = function (
+  internalId: string,
+  data: IProjectUpdateDTO
+): Promise<IProjectDB | null> {
+  return this.findOneAndUpdate({ internalId }, data, { new: true }).exec();
+};
+
+ProjectSchema.statics.deleteProject = async function (
+  projectId: string
+): Promise<void> {
+  return this.deleteOne({ internalId: projectId }).then(() => {});
+};
+
+export const ProjectModel = model<IProjectDB, IProjectModel>(
+  "Project",
+  ProjectSchema
 );
