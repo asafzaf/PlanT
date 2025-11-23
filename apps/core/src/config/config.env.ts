@@ -16,7 +16,7 @@ class EnvConfig {
   private readonly _app: AppConfig;
 
   private constructor() {
-    this.env = { ...process.env };
+    this.env =  { ...(((globalThis as any).process?.env) ?? {}) };
 
     // initialize grouped configs using existing getters (will throw if required variable is missing)
     this._app = {
