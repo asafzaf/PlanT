@@ -1,12 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import * as path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react({
       babel: {
-        plugins: [['babel-plugin-react-compiler']],
+        plugins: [["babel-plugin-react-compiler"]],
       },
     }),
   ],
@@ -17,4 +18,9 @@ export default defineConfig({
       usePolling: true,
     },
   },
-})
+  resolve: {
+    alias: {
+      "@types": path.resolve(__dirname, "../../shared/types/src"),
+    },
+  },
+});

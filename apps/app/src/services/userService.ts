@@ -1,22 +1,23 @@
-import {authApi} from '../utils/api';
+import { authApi } from "../utils/api";
+import type { IUser, IUserCreateDTO, IProjectUpdateDTO } from "@shared/types";
 
 export const UsersService = {
-  fetchUsers: async () => {
-    const { data } = await authApi.get('/users');
+  listUsers: async () => {
+    const { data } = await authApi.get<IUser[]>("/users");
     return data;
   },
 
-  addUser: async (user: { name: string }) => {
-    const { data } = await authApi.post('/users', user);
+  createNewUser: async (userData: IUserCreateDTO) => {
+    const { data } = await authApi.post<IUser>("/users", userData);
     return data;
   },
 
-  updateUser: async (user: { id: number; name: string }) => {
-    const { data } = await authApi.put(`/users/${user.id}`, user);
+  updateUser: async (userId: string, userData: IProjectUpdateDTO) => {
+    const { data } = await authApi.put<IUser>(`/users/${userId}`, userData);
     return data;
   },
 
-  deleteUser: async (id: number) => {
+  deleteUser: async (id: string) => {
     const { data } = await authApi.delete(`/users/${id}`);
     return data;
   },
