@@ -19,6 +19,9 @@ app.get("/api/health", (req, res) => {
 
 app.use("/", routes);
 
+console.log('🔥 HOT RELOAD TEST - Change #2');
+console.log('Current time:', new Date().toISOString());
+
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   logger.error({ err }, "Unhandled server error");
   res.status(500).json({ error: "Internal server error" });
