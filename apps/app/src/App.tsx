@@ -14,7 +14,6 @@ function App() {
 
   console.log("Fetched users:", users);
 
-
   return (
     <>
       <div>

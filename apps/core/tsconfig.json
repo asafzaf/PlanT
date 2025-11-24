@@ -4,7 +4,7 @@
     "outDir": "./dist",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src", "src/types/**/*.d.ts"],
+  "include": ["src", "src/types/**/*.ts"],
   "paths": {
     "@config/*": ["config/*"],
   },

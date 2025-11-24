@@ -19,6 +19,15 @@ export const useUsers = () => {
   });
 };
 
+export const useProjects = () => {
+  return useQuery<User[], Error>({
+    queryKey: ["projects"],
+    queryFn: UsersService.fetchUsers,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes cache
+  });
+};
+
 export const useAddUser = () => {
   const queryClient = useQueryClient();
 
