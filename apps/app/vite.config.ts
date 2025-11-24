@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+// @ts-expect-error: module resolution for this plugin may require updating tsconfig.moduleResolution to 'node16'|'nodenext'|'bundler'
 import react from "@vitejs/plugin-react";
 import * as path from "path";
 
