@@ -13,6 +13,7 @@ services:
       - "4000:4000"
     volumes:
       - ../../apps/core:/usr/src/app
+      - ../../shared:/shared
       - /usr/src/app/node_modules
     command: npm run dev
     depends_on:
@@ -29,6 +30,7 @@ services:
       - "5173:5173"
     volumes:
       - ../../apps/app:/app
+      - ../../shared:/shared
       - /app/node_modules
     environment:
       - VITE_REACT_APP_API_URL=${VITE_REACT_APP_API_URL}
