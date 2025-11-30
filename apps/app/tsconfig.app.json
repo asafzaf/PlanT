@@ -36,5 +36,5 @@
     { "path": "../../shared/types"}
   ],
   
-  "include": ["src", "../core/src/config", "../../shared", "../core/src/utils/logger.conf.ts"]
+  "include": ["src", "../../shared"]
 }
