@@ -33,6 +33,7 @@ services:
       - ../../shared:/shared
       - /app/node_modules
     environment:
+      - CHOKIDAR_USEPOLLING=true
       - VITE_REACT_APP_API_URL=${VITE_REACT_APP_API_URL}
     command: npm run dev
 
