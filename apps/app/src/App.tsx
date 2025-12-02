@@ -1,13 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import Header from "./components/Header";
+import Nav from "./components/Nav";
+import MainContent from "./components/MainContent";
+import CardList from "./components/CardList";
+import OverviewList from "./components/OverviewList";
+import { QuickActionsCard } from "./components/QuickActionCard";
 
-import { useUsers } from './hooks/userHook.ts';
+// Dummy data
+const userName = "יוסי";
+const businessName = "Atias & Mor";
+const businessDescription = "ניהול שיפוצים";
+import cardData from "./dummyData/cardData.json";
+
+import { useUsers } from "./hooks/userHook.ts";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   const { data: users, error, isLoading } = useUsers();
   if (isLoading) return <div>Loading users...</div>;
   if (error) return <div>Error loading users: {error.message}</div>;
@@ -15,29 +22,26 @@ function App() {
   console.log("Fetched users:", users);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app_container">
+      <Nav name={businessName} description={businessDescription}>
+        <ul>
+          <li>📊 לוח בקרה</li>
+          <li>📁 פרויקטים</li>
+          <li>💸 הוצאות</li>
+          <li>💰 הכנסות</li>
+          <li>📅 מעקב חודשי</li>
+        </ul>
+      </Nav>
+      <div className="main_content">
+        <Header name="לוח בקרה">{userName}</Header>
+        <MainContent>
+          <CardList cards={cardData} />
+          <OverviewList />
+          <QuickActionsCard />
+        </MainContent>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

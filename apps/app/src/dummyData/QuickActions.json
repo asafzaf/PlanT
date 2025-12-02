@@ -1,0 +1,28 @@
+{
+  "quickActions": [
+    {
+      "id": "reports",
+      "label": "דוחות",
+      "icon": "FaRegFileAlt",
+      "variant": "purple"
+    },
+    {
+      "id": "new_income",
+      "label": "הכנסה חדשה",
+      "icon": "FaCoins",
+      "variant": "green"
+    },
+    {
+      "id": "new_expense",
+      "label": "הוצאה חדשה",
+      "icon": "FaReceipt",
+      "variant": "red"
+    },
+    {
+      "id": "new_project",
+      "label": "פרויקט חדש",
+      "icon": "FaPlus",
+      "variant": "blue"
+    }
+  ]
+}
