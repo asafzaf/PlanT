@@ -52,6 +52,20 @@ export class IncomeController {
     }
   };
 
+  public getIncomesByProjectId = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { projectId } = req.params;
+      const incomes = await this.incomeService.getIncomesByProjectId(projectId);
+      res.json(incomes);
+    } catch (err) {
+      next(err);
+    }
+  };
+
   // Update income
   public updateIncome = async (
     req: Request,

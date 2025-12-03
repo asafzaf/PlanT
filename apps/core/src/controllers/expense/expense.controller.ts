@@ -1,83 +1,100 @@
 import { Request, Response, NextFunction } from "express";
-import { ProjectService, IProjectService } from "../../services/project";
+import { ExpenseService, IExpenseService } from "../../services/expense";
 
-export class ProjectController {
-  private projectService: IProjectService;
+export class ExpenseController {
+  private expenseService: IExpenseService;
 
-  constructor(projectService?: IProjectService) {
+  constructor(expenseService?: IExpenseService) {
     // allows DI for testing/mocking
-    this.projectService = projectService || new ProjectService();
+    this.expenseService = expenseService || new ExpenseService();
   }
 
-  // Create new project
-  public createProject = async (
+  // Create new expense
+  public createExpense = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     try {
-      const project = await this.projectService.createProject(req.body);
-      res.status(201).json(project);
+      const expense = await this.expenseService.createExpense(req.body);
+      res.status(201).json(expense);
     } catch (err) {
       next(err);
     }
   };
 
-  // List all projects
-  public listProjects = async (
+  // List all expenses
+  public listExpenses = async (
     _req: Request,
     res: Response,
     next: NextFunction
   ) => {
     try {
-      const projects = await this.projectService.listProjects();
-      res.json(projects);
+      const expenses = await this.expenseService.listExpenses();
+      res.json(expenses);
     } catch (err) {
       next(err);
     }
   };
 
-  // Get project by internalId
-  public getProjectByInternalId = async (
+  // Get expense by internalId
+  public getExpenseByInternalId = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     try {
       const { internalId } = req.params;
-      const project = await this.projectService.getProjectByInternalId(internalId);
-      if (!project) return res.status(404).json({ message: "Project not found" });
-      res.json(project);
+      const expense = await this.expenseService.getExpenseByInternalId(internalId);
+      if (!expense) return res.status(404).json({ message: "Expense not found" });
+      res.json(expense);
     } catch (err) {
       next(err);
     }
   };
 
-  // Update project
-  public updateProject = async (
+  public getExpensesByProjectId = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { projectId } = req.params;
+      const expenses = await this.expenseService.getExpensesByProjectId(projectId);
+      res.json(expenses);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  // Update expense
+  public updateExpense = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     try {
       const { internalId } = req.params;
-      const updated = await this.projectService.updateProject(internalId, req.body);
-      if (!updated) return res.status(404).json({ message: "Project not found" });
+      const updated = await this.expenseService.updateExpense(
+        internalId,
+        req.body
+      );
+      if (!updated) return res.status(404).json({ message: "Expense not found" });
       res.json(updated);
     } catch (err) {
       next(err);
     }
   };
 
-  // Delete project
-  public deleteProject = async (
+  // Delete expense
+  public deleteExpense = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     try {
       const { internalId } = req.params;
-      await this.projectService.deleteProject(internalId);
+      await this.expenseService.deleteExpense(internalId);
       res.status(204).send();
     } catch (err) {
       next(err);
