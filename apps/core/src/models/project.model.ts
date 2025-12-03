@@ -24,6 +24,22 @@ export const ProjectSchema = new Schema<IProjectDB, IProjectModel>(
     ownerId: { type: String, required: true },
     usersList: { type: [String], default: [] },
 
+    budget: {
+      totalAmount: { type: Number, required: true },
+      currency: { type: String, required: true },
+    },
+
+    status: {
+      type: String,
+      enum: ["planning", "active", "on-hold", "completed", "cancelled"],
+      required: true,
+      default: "planning",
+    },
+
+    startDate: { type: Date, required: true, default: Date.now },
+    endDate: { type: Date },
+    deadlineDate: { type: Date },
+
     isActive: { type: Boolean, default: true },
   },
   { timestamps: true }

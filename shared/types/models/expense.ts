@@ -1,5 +1,14 @@
+export interface IExpenseUpdateDTO {
+  amount?: number;
+  description?: string;
+  expenseDate?: Date;
+  category?: string;
+}
+
 export interface IExpenseCreateDTO {
   amount: number;
+  currency: string;
+  userId: string;
   description: string;
   expenseDate: Date;
   category: string;

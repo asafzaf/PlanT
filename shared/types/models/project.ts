@@ -9,7 +9,10 @@ export interface IProjectCreateDTO {
   ownerId: string;
   usersList?: string[];
   budget?: IBudget;
-  
+  status?: 'planning' | 'active' | 'on-hold' | 'completed' | 'cancelled';
+  startDate: Date;
+  endDate?: Date;
+  deadlineDate?: Date;
 }
 
 export interface IProjectUpdateDTO {

@@ -3,9 +3,18 @@ export interface IPaymentMethod {
   details?: string; // e.g., account number, PayPal email, etc.
 }
 
+export interface IIncomeUpdateDTO {
+  amount?: number;
+  description?: string;
+  receivedDate?: Date;
+  paymentMethod?: IPaymentMethod;
+  invoiceNumber?: string;
+}
+
 export interface IIncomeCreateDTO {
   projectId: string;
   amount: number;
+  userId: string;
   description?: string;
   receivedDate: Date;
   paymentMethod?: string;

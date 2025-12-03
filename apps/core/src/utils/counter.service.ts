@@ -4,7 +4,9 @@ import { CounterModel } from "../models/counter.model";
 const DEFAULT_PREFIX: Record<string, number> = {
   User: 100000,
   Project: 200000,
-  Order: 300000,
+  Income: 30000000,
+  Expense: 40000000,
+
   // add more models here
 };
 
