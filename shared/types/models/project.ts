@@ -1,8 +1,18 @@
+export interface IBudget {
+  totalAmount: number;
+  currency: string; // 'USD', 'EUR', etc.
+}
+
 export interface IProjectCreateDTO {
   name: string;
   description?: string;
   ownerId: string;
   usersList?: string[];
+  budget?: IBudget;
+  status?: 'planning' | 'active' | 'on-hold' | 'completed' | 'cancelled';
+  startDate: Date;
+  endDate?: Date;
+  deadlineDate?: Date;
 }
 
 export interface IProjectUpdateDTO {
@@ -16,9 +26,20 @@ export interface IProject {
   internalId: string;
   name: string;
   description?: string;
-  ownerId: string;
-  usersList: string[];
+  ownerId: string; // Reference to User
+  usersList: string[]; // References to Users
+
+   // Financial
+  budget?: IBudget;
+
+   // Status & Tracking
+  status: 'planning' | 'active' | 'on-hold' | 'completed' | 'cancelled';  
   isActive: boolean;
+
+  startDate: Date;
+  endDate?: Date;
+  deadlineDate?: Date;
+
   createdAt: Date;
   updatedAt: Date;
 }
