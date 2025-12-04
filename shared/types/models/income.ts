@@ -14,6 +14,7 @@ export interface IIncomeUpdateDTO {
 export interface IIncomeCreateDTO {
   projectId: string;
   amount: number;
+  currency: string;
   userId: string;
   description?: string;
   receivedDate: Date;

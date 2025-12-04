@@ -24,11 +24,31 @@ export const ExpenseSchema = new Schema<IExpenseDB, IExpenseModel>(
     description: { type: String },
     category: {
       type: String,
-      enum: ['software', 'hardware', 'contractor', 'marketing', 'travel', 'office', 'utilities', 'general', 'other'],
+      enum: [
+        "software",
+        "hardware",
+        "contractor",
+        "marketing",
+        "travel",
+        "office",
+        "utilities",
+        "general",
+        "other",
+      ],
       required: true,
-      default: 'other',
+      default: "other",
     },
     expenseDate: { type: Date, required: true },
+    projectAllocations: {
+      type: [
+        {
+          projectId: { type: String, required: true },
+          percentage: { type: Number, required: true },
+          amount: { type: Number, required: true },
+        },
+      ],
+      default: [],
+    },
   },
   { timestamps: true }
 );
@@ -69,7 +89,7 @@ ExpenseSchema.statics.deleteExpense = async function (
 ): Promise<void> {
   return this.deleteOne({ internalId }).then(() => {});
 };
-    
+
 export const ExpenseModel = model<IExpenseDB, IExpenseModel>(
   "Expense",
   ExpenseSchema

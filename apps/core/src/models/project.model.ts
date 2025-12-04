@@ -25,8 +25,8 @@ export const ProjectSchema = new Schema<IProjectDB, IProjectModel>(
     usersList: { type: [String], default: [] },
 
     budget: {
-      totalAmount: { type: Number, required: true },
-      currency: { type: String, required: true },
+      totalAmount: { type: Number },
+      currency: { type: String },
     },
 
     status: {
