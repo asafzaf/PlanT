@@ -100,6 +100,12 @@ li {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .sidebar li {
   /* width: 100%; */
   cursor: pointer;
@@ -107,11 +113,16 @@ li {
   padding: 1rem;
 }
 
-.sidebar li.active,
 .sidebar li:hover {
   background-color: var(--light-blue);
   color: var(--dark-blue);
-  border-radius: 10px;
+  /* border-radius: 10px; */
+}
+
+.nav_link--active {
+  background-color: var(--light-blue);
+  color: var(--dark-blue);
+  /* border-radius: 10px; */
 }
 
 .app_container {
