@@ -8,12 +8,15 @@ export default function Projects() {
   if (error) return <div>Error loading projects: {error.message}</div>;
   return (
     <div className="main_container">
-      <h2>Projects Page</h2>
-      <ul>
+      <div className="projects_container">
         {projects?.map((project) => (
-          <li key={project.internalId}>{project.name}</li>
+          <div className="project_card" key={project.internalId}>
+            {project.name ? <p>{project.name}</p> : null}
+            {project.description ? <p>{project.description}</p> : null}
+            {project.status ? <p>Status: {project.status}</p> : null}
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
