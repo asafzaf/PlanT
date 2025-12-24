@@ -9,6 +9,7 @@ const router = Router();
 
 // Public routes (no auth)
 router.use("/auth", authRoutes);
+router.use("/projects", authRoutes);
 
 // Private routes (secured by auth middleware inside each private route file)
 router.use("/users", userRoutes);
