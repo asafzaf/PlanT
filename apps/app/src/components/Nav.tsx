@@ -1,11 +1,15 @@
 import { NavLink } from "react-router-dom";
+import type { Dictionary } from "../i18n/i18n";
+
+type NavTexts = Dictionary["nav"];
 
 type NavProps = {
   name: string;
   description: string;
+  t: NavTexts;
 };
 
-export default function Nav({ name, description }: NavProps) {
+export default function Nav({ name, description, t }: NavProps) {
   return (
     <nav className="sidebar">
       <div className="upper_sidebar">
@@ -22,7 +26,7 @@ export default function Nav({ name, description }: NavProps) {
             }
           >
             {" "}
-            <li>📊 לוח בקרה</li>{" "}
+            <li>📊 {t.dashboard}</li>{" "}
           </NavLink>
 
           <NavLink
@@ -32,7 +36,7 @@ export default function Nav({ name, description }: NavProps) {
             }
           >
             {" "}
-            <li>📁 פרויקטים</li>
+            <li>📁 {t.projects}</li>
           </NavLink>
 
           <NavLink
@@ -42,7 +46,7 @@ export default function Nav({ name, description }: NavProps) {
             }
           >
             {" "}
-            <li>💸 הוצאות</li>
+            <li>💸 {t.expenses}</li>
           </NavLink>
 
           <NavLink
@@ -52,7 +56,7 @@ export default function Nav({ name, description }: NavProps) {
             }
           >
             {" "}
-            <li>💰 הכנסות</li>
+            <li>💰 {t.incomes}</li>
           </NavLink>
 
           <NavLink
@@ -62,7 +66,7 @@ export default function Nav({ name, description }: NavProps) {
             }
           >
             {" "}
-            <li>📅 מעקב חודשי</li>
+            <li>📅 {t.monthly}</li>
           </NavLink>
         </ul>
       </div>

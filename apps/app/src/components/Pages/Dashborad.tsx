@@ -1,14 +1,18 @@
 import CardList from "../CardList";
 import OverviewList from "../OverviewList";
 import { QuickActionsCard } from "../QuickActionCard";
-import cardData from "../../dummyData/cardData.json";
+import type { Dictionary } from "../../i18n/i18n";
 
-export default function Dashboard() {
+type DashboardProps = {
+  t: Dictionary;
+};
+
+export default function Dashboard({ t }: DashboardProps) {
   return (
     <div className="main_container">
-      <CardList cards={cardData} />
-      <OverviewList />
-      <QuickActionsCard />
+      <CardList cards={t.cardData} />
+      <OverviewList data={t} />
+      <QuickActionsCard actions={t.quickActions} />
     </div>
   );
 }

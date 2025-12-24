@@ -1,0 +1,98 @@
+{
+  "userName": "יוסי",
+  "businessName": "Atias & Mor",
+  "businessDescription": "ניהול שיפוצים",
+  "nav": {
+    "dashboard": "לוח בקרה",
+    "projects": "פרויקטים",
+    "expenses": "הוצאות",
+    "incomes": "הכנסות",
+    "monthly": "מעקב חודשי"
+  },
+  "toggle": "עברית",
+  "cardData": [
+    {
+      "title": "סה״כ ",
+      "number": 12000,
+      "icon": "FaHammer"
+    },
+    {
+      "title": "פרויקטים פעילים",
+      "number": 5,
+      "icon": "FaPlay"
+    },
+    {
+      "title": "סה״כ הכנסות",
+      "number": 25000,
+      "icon": "FaArrowDown"
+    },
+    {
+      "title": "סה״כ הוצאות",
+      "number": 5,
+      "icon": "FaArrowUp"
+    }
+  ],
+  "quickActions": [
+    {
+      "id": "reports",
+      "label": "דוחות",
+      "icon": "FaRegFileAlt",
+      "variant": "purple"
+    },
+    {
+      "id": "new_income",
+      "label": "הכנסה חדשה",
+      "icon": "FaCoins",
+      "variant": "green"
+    },
+    {
+      "id": "new_expense",
+      "label": "הוצאה חדשה",
+      "icon": "FaReceipt",
+      "variant": "red"
+    },
+    {
+      "id": "new_project",
+      "label": "פרויקט חדש",
+      "icon": "FaPlus",
+      "variant": "blue"
+    }
+  ],
+  "financialOverview": {
+    "label": "סקירה פיננסית",
+    "income": 45000,
+    "incomeTitle": "הכנסות",
+    "expenses": 28000,
+    "expensesTitle": "הוצאות",
+    "profit": 17000,
+    "profitTitle": "רווח",
+    "profitProgress": 0.8,
+    "profitProgressLabel": "אחוז עלייה"
+  },
+  "recentProjects": {
+    "label": "פרויקטים אחרונים",
+    "projects": [
+      {
+        "id": 1,
+        "title": "שיפוץ דירה - רחוב הרצל 15",
+        "client": "משה כהן",
+        "status": "active",
+        "statusLabel": "פעיל"
+      },
+      {
+        "id": 2,
+        "title": "חידוש מטבח - רחוב בן גוריון 8",
+        "client": "שרה לוי",
+        "status": "in_progress",
+        "statusLabel": "בתהליך"
+      },
+      {
+        "id": 3,
+        "title": "שיפוץ אמבטיה - רחוב דיזנגוף 42",
+        "client": "דוד אברהם",
+        "status": "complete",
+        "statusLabel": "הושלם"
+      }
+    ]
+  }
+}

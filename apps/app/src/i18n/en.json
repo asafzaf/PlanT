@@ -1,0 +1,98 @@
+{
+  "userName": "Yossi",
+  "businessName": "Atias & Mor",
+  "businessDescription": "Welcome to my application",
+  "nav": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "expenses": "Expenses",
+    "incomes": "Incomes",
+    "monthly": "Monthly Tracker"
+  },
+  "toggle": "English",
+  "cardData": [
+    {
+      "title": "Total",
+      "number": 12000,
+      "icon": "FaHammer"
+    },
+    {
+      "title": "Active Projects",
+      "number": 5,
+      "icon": "FaPlay"
+    },
+    {
+      "title": "Total Income",
+      "number": 25000,
+      "icon": "FaArrowDown"
+    },
+    {
+      "title": "Total Expenses",
+      "number": 5,
+      "icon": "FaArrowUp"
+    }
+  ],
+  "quickActions": [
+    {
+      "id": "reports",
+      "label": "Reports",
+      "icon": "FaRegFileAlt",
+      "variant": "purple"
+    },
+    {
+      "id": "new_income",
+      "label": "New Income",
+      "icon": "FaCoins",
+      "variant": "green"
+    },
+    {
+      "id": "new_expense",
+      "label": "New Expense",
+      "icon": "FaReceipt",
+      "variant": "red"
+    },
+    {
+      "id": "new_project",
+      "label": "New Project",
+      "icon": "FaPlus",
+      "variant": "blue"
+    }
+  ],
+  "financialOverview": {
+    "label": "Financial Overview",
+    "income": 45000,
+    "incomeTitle": "Incomes",
+    "expenses": 28000,
+    "expensesTitle": "Expenses",
+    "profit": 17000,
+    "profitTitle": "Profit",
+    "profitProgress": 0.68,
+    "profitProgressLabel": "Profit Increase Percentage"
+  },
+  "recentProjects": {
+    "label": "Recent Projects",
+    "projects": [
+      {
+        "id": 1,
+        "title": "Apartment Renovation - Herzl Street 15",
+        "client": "Moshe Cohen",
+        "status": "active",
+        "statusLabel": "Active"
+      },
+      {
+        "id": 2,
+        "title": "Kitchen Renovation - Ben Gurion Street 8",
+        "client": "Sarah Levi",
+        "status": "in_progress",
+        "statusLabel": "In Progress"
+      },
+      {
+        "id": 3,
+        "title": "Bathroom Renovation - Dizengoff Street 42",
+        "client": "David Avraham",
+        "status": "complete",
+        "statusLabel": "Complete"
+      }
+    ]
+  }
+}
