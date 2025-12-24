@@ -1,19 +1,20 @@
 import OverviewCard from "./OverviewCard";
-import overviewData from "../dummyData/overviewData.json";
 import { FinancialOverviewContent } from "./FinancialOverviewContent";
 import { RecentProjectsContent } from "./RecentProjectsContent";
-import type { Project } from "./RecentProjectsContent";
+import type { Dictionary } from "../i18n/i18n";
 
-export default function OverviewList() {
-  const { financialOverview, recentProjects } = overviewData;
+type OverviewListProps = {
+  data: Dictionary;
+};
 
+export default function OverviewList({ data }: OverviewListProps) {
   return (
     <div className="overview_grid">
-      <OverviewCard title="פרויקטים אחרונים">
-        <RecentProjectsContent projects={recentProjects as Project[]} />
+      <OverviewCard title={data.recentProjects.label}>
+        <RecentProjectsContent projects={data.recentProjects.projects} />
       </OverviewCard>
-      <OverviewCard title="סקירה פיננסית">
-        <FinancialOverviewContent {...financialOverview} />
+      <OverviewCard title={data.financialOverview.label}>
+        <FinancialOverviewContent finance={data.financialOverview} />
       </OverviewCard>
     </div>
   );

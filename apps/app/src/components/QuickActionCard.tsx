@@ -1,5 +1,5 @@
 import * as FaIcons from "react-icons/fa";
-import QuickActions from "../dummyData/QuickActions.json";
+// import QuickActions from "../dummyData/QuickActions.json";
 
 type QuickActionVariant = "purple" | "green" | "red" | "blue";
 
@@ -12,13 +12,22 @@ export type QuickAction = {
 
 type QuickActionsCardProps = {
   onActionClick?: (id: string) => void;
+  actions: {
+    id: string;
+    label: string;
+    icon: string;
+    variant: string;
+  }[];
 };
 
-export function QuickActionsCard({ onActionClick }: QuickActionsCardProps) {
+export function QuickActionsCard({
+  onActionClick,
+  actions,
+}: QuickActionsCardProps) {
   return (
     <div className="quick_actions" dir="rtl">
       <div className="quick_actions_grid">
-        {QuickActions.quickActions.map((action) => {
+        {actions.map((action) => {
           const Icon =
             FaIcons[action.icon as keyof typeof FaIcons] ?? FaIcons.FaPlus;
 
