@@ -45,8 +45,11 @@ export class ProjectController {
   ) => {
     try {
       const { internalId } = req.params;
-      const project = await this.projectService.getProjectByInternalId(internalId);
-      if (!project) return res.status(404).json({ message: "Project not found" });
+      const project = await this.projectService.getProjectByInternalId(
+        internalId
+      );
+      if (!project)
+        return res.status(404).json({ message: "Project not found" });
       res.json(project);
     } catch (err) {
       next(err);
@@ -61,8 +64,12 @@ export class ProjectController {
   ) => {
     try {
       const { internalId } = req.params;
-      const updated = await this.projectService.updateProject(internalId, req.body);
-      if (!updated) return res.status(404).json({ message: "Project not found" });
+      const updated = await this.projectService.updateProject(
+        internalId,
+        req.body
+      );
+      if (!updated)
+        return res.status(404).json({ message: "Project not found" });
       res.json(updated);
     } catch (err) {
       next(err);

@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import MainContent from "./components/MainContent";
 import Dashboard from "../src/components/Pages/Dashborad";
 import Projects from "../src/components/Pages/Projects";
+import CreateProject from "../src/components/Pages/CreateProject";
 import { useI18n } from "./i18n/useI18n";
 import { useUsers } from "./hooks/userHook.ts";
 
@@ -54,6 +55,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard t={t} />} />
             <Route path="/projects" element={<Projects t={t} />} />
+            <Route path="/projects/new" element={<CreateProject t={t} />} />
             {/* <Route path="/expenses" element={<ExpensesPage />} /> */}
             {/* <Route path="/income" element={<IncomePage />} /> */}
             {/* <Route path="/monthly" element={<MonthlyPage />} /> */}

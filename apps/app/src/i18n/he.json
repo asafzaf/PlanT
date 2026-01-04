@@ -104,6 +104,7 @@
     "searchPlaceholder": "חיפוש לפי שם / לקוח / כתובת...",
     "clear": "ניקוי",
     "projects": "פרויקטים",
+    "newProject": "פרויקט חדש",
     "allStatuses": "כל הסטטוסים",
     "statuses": {
       "planning": "בתכנון",
@@ -112,5 +113,47 @@
       "cancelled": "בוטל",
       "on-hold": "מושהה"
     }
+  },
+  "common": {
+    "back": "חזרה",
+    "edit": "עריכה",
+    "save": "שמירה",
+    "saving": "שומר...",
+    "cancel": "ביטול",
+    "create": "יצירה",
+    "delete": "מחיקה",
+    "confirm": "אישור",
+    "close": "סגירה",
+
+    "yes": "כן",
+    "no": "לא",
+
+    "search": "חיפוש",
+    "clear": "ניקוי",
+    "filter": "סינון",
+    "filters": "סינונים",
+
+    "loading": "טוען...",
+    "error": "אירעה שגיאה",
+    "notFound": "לא נמצא",
+    "noData": "אין נתונים להצגה",
+
+    "description": "תיאור",
+    "details": "פרטים",
+
+    "name": "שם",
+    "status": "סטטוס",
+    "phone": "טלפון",
+    "email": "אימייל",
+    "address": "כתובת",
+
+    "budget": "תקציב",
+    "currency": "מטבע",
+    "amount": "סכום",
+
+    "createdAt": "נוצר בתאריך",
+    "updatedAt": "עודכן בתאריך",
+
+    "actions": "פעולות"
   }
 }

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useProjects } from "../../hooks/projectHook.ts";
 import type { IProject } from "@shared/types";
 import type { Dictionary } from "../../i18n/i18n";
+import { Plus } from "lucide-react";
 
 type ProjectsProps = {
   t: Dictionary;
@@ -84,6 +85,15 @@ export default function Projects({ t }: ProjectsProps) {
             }}
           >
             {t.projectsPage.clear}
+          </button>
+
+          <button
+            className="btn icon-btn"
+            onClick={() => navigate("/projects/new")}
+            aria-label={t.projectsPage.newProject}
+            title={t.projectsPage.newProject}
+          >
+            <Plus size={20} strokeWidth={2.5} />
           </button>
 
           <div className="projects_count">
