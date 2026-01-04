@@ -9,7 +9,7 @@ export interface IProjectCreateDTO {
   ownerId: string;
   usersList?: string[];
   budget?: IBudget;
-  status?: 'planning' | 'active' | 'on-hold' | 'completed' | 'cancelled';
+  status?: "planning" | "active" | "on-hold" | "completed" | "cancelled";
   startDate: Date;
   endDate?: Date;
   deadlineDate?: Date;
@@ -20,6 +20,17 @@ export interface IProjectUpdateDTO {
   description?: string;
   usersList?: string[];
   isActive?: boolean;
+
+  customerName?: string;
+  customerPhone?: string;
+  customerEmail?: string;
+  customerAddress?: string;
+
+  budget?: IBudget;
+  status?: "planning" | "active" | "on-hold" | "completed" | "cancelled";
+  startDate?: Date;
+  endDate?: Date;
+  deadlineDate?: Date;
 }
 
 export interface IProject {
@@ -29,11 +40,17 @@ export interface IProject {
   ownerId: string; // Reference to User
   usersList: string[]; // References to Users
 
-   // Financial
+  // Customer Informations
+  customerName: string;
+  customerPhone: string;
+  customerEmail?: string;
+  customerAddress: string;
+
+  // Financial
   budget?: IBudget;
 
-   // Status & Tracking
-  status: 'planning' | 'active' | 'on-hold' | 'completed' | 'cancelled';  
+  // Status & Tracking
+  status: "planning" | "active" | "on-hold" | "completed" | "cancelled";
   isActive: boolean;
 
   startDate: Date;

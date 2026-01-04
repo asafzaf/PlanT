@@ -24,6 +24,13 @@ export const ProjectSchema = new Schema<IProjectDB, IProjectModel>(
     ownerId: { type: String, required: true },
     usersList: { type: [String], default: [] },
 
+    // Customer Informations
+    customerName: { type: String, required: true },
+    customerPhone: { type: String, required: true },
+    customerEmail: { type: String },
+    customerAddress: { type: String, required: true },
+
+    // Financial
     budget: {
       totalAmount: { type: Number },
       currency: { type: String },
