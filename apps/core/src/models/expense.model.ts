@@ -7,6 +7,7 @@ export interface IExpenseModel extends Model<IExpenseDB> {
   createExpense(data: IExpenseCreateDTO): Promise<IExpenseDB>;
   listExpenses(): Promise<IExpenseDB[]>;
   getExpenseByInternalId(internalId: string): Promise<IExpenseDB | null>;
+  getExpensesByUserId(userId: string): Promise<IExpenseDB[]>;
   getExpensesByProjectId(projectId: string): Promise<IExpenseDB[]>;
   updateExpenseInternalId(
     internalId: string,
@@ -71,10 +72,18 @@ ExpenseSchema.statics.getExpenseByInternalId = function (
   return this.findOne({ internalId }).exec();
 };
 
+ExpenseSchema.statics.getExpensesByUserId = function (
+  userId: string
+): Promise<IExpenseDB[]> {
+  return this.find({ userId }).exec();
+};
+
 ExpenseSchema.statics.getExpensesByProjectId = function (
   projectId: string
 ): Promise<IExpenseDB[]> {
-  return this.find({ projectId }).exec();
+  return this.find({
+    projectAllocations: { $elemMatch: { projectId } },
+  }).exec();
 };
 
 ExpenseSchema.statics.updateExpenseInternalId = function (
