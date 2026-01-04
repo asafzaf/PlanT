@@ -4,6 +4,7 @@ export interface IExpenseService {
   createExpense(data: IExpenseCreateDTO): Promise<IExpense>;
   listExpenses(): Promise<IExpense[]>;
   getExpenseByInternalId(internalId: string): Promise<IExpense | null>;
+  getExpensesByUserId(userId: string): Promise<IExpense[]>;
   getExpensesByProjectId(projectId: string): Promise<IExpense[]>;
   updateExpense(
     internalId: string,

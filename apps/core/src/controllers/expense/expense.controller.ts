@@ -45,14 +45,33 @@ export class ExpenseController {
   ) => {
     try {
       const { internalId } = req.params;
-      const expense = await this.expenseService.getExpenseByInternalId(internalId);
-      if (!expense) return res.status(404).json({ message: "Expense not found" });
+      const expense = await this.expenseService.getExpenseByInternalId(
+        internalId
+      );
+      if (!expense)
+        return res.status(404).json({ message: "Expense not found" });
       res.json(expense);
     } catch (err) {
       next(err);
     }
   };
 
+  // Get expenses by userId
+  public getExpensesByUserId = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { userId } = req.params;
+      const expenses = await this.expenseService.getExpensesByUserId(userId);
+      res.json(expenses);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  // Get expenses by projectId
   public getExpensesByProjectId = async (
     req: Request,
     res: Response,
@@ -60,7 +79,9 @@ export class ExpenseController {
   ) => {
     try {
       const { projectId } = req.params;
-      const expenses = await this.expenseService.getExpensesByProjectId(projectId);
+      const expenses = await this.expenseService.getExpensesByProjectId(
+        projectId
+      );
       res.json(expenses);
     } catch (err) {
       next(err);
@@ -79,7 +100,8 @@ export class ExpenseController {
         internalId,
         req.body
       );
-      if (!updated) return res.status(404).json({ message: "Expense not found" });
+      if (!updated)
+        return res.status(404).json({ message: "Expense not found" });
       res.json(updated);
     } catch (err) {
       next(err);
