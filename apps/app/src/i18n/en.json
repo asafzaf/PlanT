@@ -94,5 +94,23 @@
         "statusLabel": "Complete"
       }
     ]
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "name": "Project Name",
+    "status": "Status",
+    "customer": "Customer",
+    "address": "Address",
+    "searchPlaceholder": "Search by name / customer / address...",
+    "clear": "Clear",
+    "projects": "Projects",
+    "allStatuses": "All statuses",
+    "statuses": {
+      "planning": "Planning",
+      "active": "Active",
+      "completed": "Completed",
+      "cancelled": "Canceled",
+      "on-hold": "On Hold"
+    }
   }
 }

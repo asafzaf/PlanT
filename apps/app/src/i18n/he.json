@@ -94,5 +94,23 @@
         "statusLabel": "הושלם"
       }
     ]
+  },
+  "projectsPage": {
+    "title": "פרויקטים",
+    "name": "שם פרויקט",
+    "status": "סטטוס",
+    "customer": "לקוח",
+    "address": "כתובת",
+    "searchPlaceholder": "חיפוש לפי שם / לקוח / כתובת...",
+    "clear": "ניקוי",
+    "projects": "פרויקטים",
+    "allStatuses": "כל הסטטוסים",
+    "statuses": {
+      "planning": "בתכנון",
+      "active": "פעיל",
+      "completed": "הושלם",
+      "cancelled": "בוטל",
+      "on-hold": "מושהה"
+    }
   }
 }

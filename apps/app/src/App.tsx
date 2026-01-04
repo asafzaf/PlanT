@@ -53,7 +53,7 @@ function App() {
         <MainContent>
           <Routes>
             <Route path="/" element={<Dashboard t={t} />} />
-            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects" element={<Projects t={t} />} />
             {/* <Route path="/expenses" element={<ExpensesPage />} /> */}
             {/* <Route path="/income" element={<IncomePage />} /> */}
             {/* <Route path="/monthly" element={<MonthlyPage />} /> */}
