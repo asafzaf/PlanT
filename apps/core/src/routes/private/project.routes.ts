@@ -5,7 +5,7 @@ import { authMiddleware } from "../../middleware/auth.middleware";
 const router = Router();
 const controller = new ProjectController();
 
-// router.use(authMiddleware); // secure all routes
+router.use(authMiddleware); // secure all routes
 
 router.get("/", controller.listProjects);
 router.get("/internal/:internalId", controller.getProjectByInternalId);
