@@ -19,6 +19,11 @@ export class ExpenseService implements IExpenseService {
     return expense ?? null;
   }
 
+  // Get expenses by userId
+  async getExpensesByUserId(userId: string): Promise<IExpense[]> {
+    return await ExpenseModel.getExpensesByUserId(userId);
+  }
+
   // Get expenses by projectId
   async getExpensesByProjectId(projectId: string): Promise<IExpense[]> {
     return await ExpenseModel.getExpensesByProjectId(projectId);

@@ -8,6 +8,7 @@ router.use(authMiddleware); // secure all routes
 
 router.get("/", controller.listExpenses);
 router.get("/internal/:internalId", controller.getExpenseByInternalId);
+router.get("/user/:userId", controller.getExpensesByUserId);
 router.get("/project/:projectId", controller.getExpensesByProjectId);
 router.post("/", controller.createExpense);
 router.put("/:internalId", controller.updateExpense);
