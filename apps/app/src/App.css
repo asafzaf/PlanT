@@ -170,11 +170,20 @@ main {
   height: calc(90% - var(--header-height));
 }
 
-.main_container {
+:root[dir="ltr"] .main_container {
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
+  direction: ltr;
+}
+
+:root[dir="rtl"] .main_container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  direction: rtl;
 }
 
 .main_content {
@@ -513,25 +522,6 @@ main {
   color: #2563eb;
 }
 
-.projects_container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: space-around;
-  width: 97%;
-}
-
-.project_card {
-  background-color: #fff;
-  width: 100%;
-  /* max-width: 240px; */
-  border-radius: 18px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
-
 .lang_btn {
   font-family: "Heebo", sans-serif;
   font-weight: 500;
@@ -543,4 +533,484 @@ main {
 }
 .lang_btn:hover {
   background-color: #f0f0f0;
+}
+
+/* PROJECT PAGE */
+
+.projects_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+/* One project = one row */
+.project_card {
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1fr 1.5fr 2fr;
+  align-items: center;
+  column-gap: 16px;
+}
+
+/* Optional: hover effect */
+.project_card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Text styling */
+.project_card p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Emphasis */
+.project_card p:first-child {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Status highlight */
+.project_card p:nth-child(3) {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.project_card.clickable {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.project_card.clickable:hover {
+  /* transform: translateY(-2px); */
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+/*  */
+
+/* Filters bar */
+.projects_toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  font-family: "Heebo", sans-serif !important;
+}
+
+.projects_search {
+  flex: 1;
+  min-width: 220px;
+  padding: 10px 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+  font-family: "Heebo", sans-serif;
+}
+
+.projects_select {
+  padding: 10px 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+  font-family: "Heebo", sans-serif;
+}
+
+.projects_clear {
+  padding: 10px 14px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  font-family: "Heebo", sans-serif;
+}
+
+.projects_count {
+  margin-right: auto; /* in RTL this pushes it to the left side */
+  font-size: 13px;
+  color: #666;
+}
+
+/* Header row */
+.projects_header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 2fr;
+  gap: 16px;
+
+  padding: 10px 16px;
+  color: #7a7a7a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* List container */
+.projects_container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Each project row */
+.project_row {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 2fr;
+  gap: 16px;
+  align-items: center;
+
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.project_row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.cell {
+  font-size: 14px;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Make name a bit stronger */
+.cell.name {
+  font-weight: 700;
+}
+
+/* Optional status badge look */
+.cell.status {
+  text-transform: capitalize;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Optional description below row as full width */
+.row_details {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+  color: #555;
+  font-size: 13px;
+}
+
+.btn {
+  padding: 10px 14px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #111;
+  color: #fff;
+  border-color: transparent;
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 900px) {
+  .projects_header {
+    display: none; /* hide titles on mobile */
+  }
+
+  .project_row {
+    grid-template-columns: 1fr;
+  }
+
+  .cell {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 900px) {
+  .project_card {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+}
+
+/* CREATE PROJECT PAGE */
+
+/* Page container */
+.project_details_container {
+  max-width: 980px;
+  margin: 10px;
+  padding: 16px;
+}
+
+/* Top bar */
+.details_topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.details_bottombar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.details_title {
+  flex: 1;
+  font-size: 20px;
+  font-weight: 800;
+  color: #111;
+}
+
+.details_subtitle {
+  font-size: 13px;
+  color: #777;
+  margin-top: 4px;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  background: #607d8b;
+}
+
+.btn.primary {
+  background: #607d8b;
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn.primary:hover {
+  background: #3a4e58;
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Form container */
+.details_form {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Form rows */
+.form_row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form_row.full {
+  grid-column: 1 / -1;
+}
+
+/* Labels */
+.form_row label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Inputs */
+.form_row input,
+.form_row select,
+.form_row textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form_row textarea {
+  resize: vertical;
+}
+
+/* Focus state */
+.form_row input:focus,
+.form_row select:focus,
+.form_row textarea:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Error message */
+.form_error {
+  grid-column: 1 / -1;
+  color: #b00020;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* RTL support */
+[dir="rtl"] .details_topbar {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .form_row {
+  text-align: right;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 900px) {
+  .details_form {
+    grid-template-columns: 1fr;
+  }
+
+  .details_topbar {
+    flex-wrap: wrap;
+  }
+
+  .details_title {
+    order: 2;
+    width: 100%;
+  }
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #607d8b;
+  color: #fff;
+  border: none;
+
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.icon-btn svg {
+  stroke-width: 2.5;
+}
+
+.icon-btn:hover {
+  background: #475e6a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.icon-btn:active {
+  transform: translateY(0);
+}
+
+.icon-btn:focus-visible {
+  outline: 2px solid #607d8b;
+  outline-offset: 2px;
+}
+
+/* =========================
+   Direction (LTR / RTL)
+   ========================= */
+
+/* Default: LTR */
+[dir="ltr"] .project_details_container,
+[dir="ltr"] .details_form,
+[dir="ltr"] .details_topbar,
+[dir="ltr"] .details_bottombar {
+  direction: ltr;
+}
+
+/* RTL */
+[dir="rtl"] .project_details_container,
+[dir="rtl"] .details_form,
+[dir="rtl"] .details_topbar,
+[dir="rtl"] .details_bottombar {
+  direction: rtl;
+}
+
+/* ---- Top / Bottom bars alignment ---- */
+
+/* LTR: buttons left, title center-ish (flex:1), actions right */
+[dir="ltr"] .details_topbar,
+[dir="ltr"] .details_bottombar {
+  flex-direction: row;
+}
+
+/* RTL: mirror the bar */
+[dir="rtl"] .details_topbar,
+[dir="rtl"] .details_bottombar {
+  flex-direction: row;
+}
+
+/* Ensure title text aligns with direction */
+[dir="ltr"] .details_title {
+  text-align: left;
+}
+
+[dir="rtl"] .details_title {
+  text-align: right;
+}
+
+/* ---- Form text + inputs ---- */
+
+/* Form row labels/value align */
+[dir="ltr"] .form_row {
+  text-align: left;
+}
+
+[dir="rtl"] .form_row {
+  text-align: right;
+}
+
+/* Inputs, selects, textarea text alignment */
+[dir="ltr"] .form_row input,
+[dir="ltr"] .form_row select,
+[dir="ltr"] .form_row textarea {
+  text-align: left;
+}
+
+[dir="rtl"] .form_row input,
+[dir="rtl"] .form_row select,
+[dir="rtl"] .form_row textarea {
+  text-align: right;
+}
+
+/* Placeholder alignment (works in most browsers) */
+[dir="rtl"] .form_row input::placeholder,
+[dir="rtl"] .form_row textarea::placeholder {
+  text-align: right;
+}
+
+[dir="ltr"] .form_row input::placeholder,
+[dir="ltr"] .form_row textarea::placeholder {
+  text-align: left;
 }

@@ -94,5 +94,66 @@
         "statusLabel": "Complete"
       }
     ]
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "name": "Project Name",
+    "status": "Status",
+    "customer": "Customer",
+    "address": "Address",
+    "searchPlaceholder": "Search by name / customer / address...",
+    "clear": "Clear",
+    "projects": "Projects",
+    "newProject": "New Project",
+    "allStatuses": "All statuses",
+    "statuses": {
+      "planning": "Planning",
+      "active": "Active",
+      "completed": "Completed",
+      "cancelled": "Canceled",
+      "on-hold": "On Hold"
+    }
+  },
+  "common": {
+    "back": "Back",
+    "edit": "Edit",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "create": "Create",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "close": "Close",
+
+    "yes": "Yes",
+    "no": "No",
+
+    "search": "Search",
+    "clear": "Clear",
+    "filter": "Filter",
+    "filters": "Filters",
+
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "notFound": "Not found",
+    "noData": "No data available",
+
+    "description": "Description",
+    "details": "Details",
+
+    "name": "Name",
+    "status": "Status",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+
+    "budget": "Budget",
+    "currency": "Currency",
+    "amount": "Amount",
+
+    "createdAt": "Created at",
+    "updatedAt": "Updated at",
+
+    "actions": "Actions"
   }
 }

@@ -6,11 +6,15 @@ export interface IBudget {
 export interface IProjectCreateDTO {
   name: string;
   description?: string;
-  ownerId: string;
+  ownerId?: string;
   usersList?: string[];
+  customerName: string;
+  customerPhone: string;
+  customerEmail?: string;
+  customerAddress: string;
   budget?: IBudget;
   status?: "planning" | "active" | "on-hold" | "completed" | "cancelled";
-  startDate: Date;
+  startDate?: Date;
   endDate?: Date;
   deadlineDate?: Date;
 }
