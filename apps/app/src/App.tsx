@@ -22,12 +22,12 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
 function App() {
   const { t, toggleLang } = useI18n();
-  const { data: users, error, isLoading } = useUsers();
+  // const { data: users, error, isLoading } = useUsers();
   const { user, isAuthenticated } = useAuth();
   const location = useLocation();
 
-  if (isLoading) return <div>Loading users...</div>;
-  if (error) return <div>Error loading users: {error.message}</div>;
+  // if (isLoading) return <div>Loading users...</div>;
+  // if (error) return <div>Error loading users: {error.message}</div>;
 
   function getPageTitle(pathname: string): string {
     switch (pathname) {
