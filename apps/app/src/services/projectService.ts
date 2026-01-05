@@ -7,6 +7,13 @@ export const ProjectService = {
     return data;
   },
 
+  getProjectByInternalId: async (internalId: string) => {
+    const { data } = await authApi.get<IProject>(
+      `/projects/internal/${internalId}`
+    );
+    return data;
+  },
+
   createProject: async (payload: IProjectCreateDTO) => {
     const { data } = await authApi.post<IProject>("/projects", payload);
     return data;
