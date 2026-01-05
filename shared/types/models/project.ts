@@ -6,7 +6,7 @@ export interface IBudget {
 export interface IProjectCreateDTO {
   name: string;
   description?: string;
-  ownerId?: string;
+  ownerId: string;
   usersList?: string[];
   customerName: string;
   customerPhone: string;

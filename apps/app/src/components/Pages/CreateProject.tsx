@@ -47,9 +47,27 @@ export default function CreateProject({ t }: Props) {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
+  const getAuthUserId = (): string | undefined => {
+    const authUser = localStorage.getItem("authUser");
+    if (!authUser) return undefined;
+
+    try {
+      const parsed = JSON.parse(authUser);
+      return parsed._id;
+    } catch {
+      return undefined;
+    }
+  };
+
   const onSubmit = async () => {
     const budgetAmount =
       form.totalAmount.trim() === "" ? undefined : Number(form.totalAmount);
+
+    const ownerId = getAuthUserId();
+
+    if (!ownerId) {
+      throw new Error("User not authenticated");
+    }
 
     const payload: IProjectCreateDTO = {
       name: form.name,
@@ -63,12 +81,13 @@ export default function CreateProject({ t }: Props) {
         budgetAmount !== undefined
           ? { totalAmount: budgetAmount, currency: form.currency }
           : undefined,
-      ownerId: "user-123", // TODO: Replace with actual user ID
+      ownerId,
       //   startDate: new Date(),
     };
-    console.log("Creating project with payload:", payload);
+    // console.log("Creating project with payload:", payload);
     const created = await createMutation.mutateAsync(payload);
-    navigate(`/projects/${created.internalId}`);
+    console.log("Created project:", created);
+    navigate(`/projects/`);
   };
 
   return (
@@ -77,16 +96,17 @@ export default function CreateProject({ t }: Props) {
         <div className="details_topbar">
           <div className="details_title">{t.projectsPage.newProject}</div>
         </div>
-
+        {/* Name */}
         <div className="details_form">
           <div className="form_row">
             <label>{t.projectsPage.name}</label>
             <input
+              required
               value={form.name}
               onChange={(e) => onChange("name", e.target.value)}
             />
           </div>
-
+          {/* Status */}
           <div className="form_row">
             <label>{t.projectsPage.status}</label>
             <select
@@ -110,7 +130,7 @@ export default function CreateProject({ t }: Props) {
               </option>
             </select>
           </div>
-
+          {/* Customer Name */}
           <div className="form_row">
             <label>{t.projectsPage.customer}</label>
             <input
@@ -118,7 +138,7 @@ export default function CreateProject({ t }: Props) {
               onChange={(e) => onChange("customerName", e.target.value)}
             />
           </div>
-
+          {/* Customer Phone */}
           <div className="form_row">
             <label>{t.common?.phone ?? "Phone"}</label>
             <input
@@ -126,7 +146,7 @@ export default function CreateProject({ t }: Props) {
               onChange={(e) => onChange("customerPhone", e.target.value)}
             />
           </div>
-
+          {/* Customer Email */}
           <div className="form_row">
             <label>{t.common?.email ?? "Email"}</label>
             <input
@@ -134,7 +154,7 @@ export default function CreateProject({ t }: Props) {
               onChange={(e) => onChange("customerEmail", e.target.value)}
             />
           </div>
-
+          {/* Customer Address */}
           <div className="form_row">
             <label>{t.projectsPage.address}</label>
             <input
@@ -142,7 +162,7 @@ export default function CreateProject({ t }: Props) {
               onChange={(e) => onChange("customerAddress", e.target.value)}
             />
           </div>
-
+          {/* Budget */}
           <div className="form_row">
             <label>{t.common?.budget ?? "Budget"}</label>
             <input
@@ -152,7 +172,7 @@ export default function CreateProject({ t }: Props) {
               placeholder="0"
             />
           </div>
-
+          {/* Currency */}
           <div className="form_row">
             <label>{t.common?.currency ?? "Currency"}</label>
             <select
@@ -164,7 +184,7 @@ export default function CreateProject({ t }: Props) {
               <option value="EUR">EUR</option>
             </select>
           </div>
-
+          {/* Description */}
           <div className="form_row full">
             <label>{t.common?.description ?? "Description"}</label>
             <textarea
@@ -173,7 +193,7 @@ export default function CreateProject({ t }: Props) {
               onChange={(e) => onChange("description", e.target.value)}
             />
           </div>
-
+          {/* Error Message */}
           {createMutation.error ? (
             <div className="form_error">{createMutation.error.message}</div>
           ) : null}
