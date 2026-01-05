@@ -154,6 +154,7 @@
     "createdAt": "Created at",
     "updatedAt": "Updated at",
 
-    "actions": "Actions"
+    "actions": "Actions",
+    "required": "Required"
   }
 }
