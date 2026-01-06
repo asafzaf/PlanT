@@ -7,7 +7,9 @@
     "projects": "Projects",
     "expenses": "Expenses",
     "incomes": "Incomes",
-    "monthly": "Monthly Tracker"
+    "monthly": "Monthly Tracker",
+    "projectDetails": "Project Details",
+    "newProject": "New Project"
   },
   "toggle": "English",
   "cardData": [
@@ -164,6 +166,8 @@
     "description": "Description",
     "status": "Status",
     "customer": "Customer",
-    "address": "Address"
+    "address": "Address",
+    "name": "Name",
+    "deleteConfirm": "Are you sure you want to delete this project?"
   }
 }
