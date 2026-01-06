@@ -147,6 +147,8 @@
     "phone": "Phone",
     "email": "Email",
     "address": "Address",
+    "login": "Login",
+    "password": "Password",
 
     "budget": "Budget",
     "currency": "Currency",

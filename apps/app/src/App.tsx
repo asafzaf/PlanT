@@ -13,7 +13,7 @@ import Dashboard from "../src/components/Pages/Dashborad";
 import Projects from "../src/components/Pages/Projects";
 import ProjectDetails from "../src/components/Pages/ProjectDetails";
 import CreateProject from "../src/components/Pages/CreateProject";
-import LoginPage from "../src/pages/LoginPage";
+import LoginPage from "../src/components/Pages/LoginPage";
 import { useI18n } from "./i18n/useI18n";
 import { useAuth } from "./context/AuthContext";
 
@@ -59,12 +59,26 @@ function App() {
         name={user?.businessName ?? t.businessName}
         description={user?.businessDescription ?? t.businessDescription}
         t={t.nav}
-      ></Nav>
+      >
+        <button
+          className="lang_toggle"
+          onClick={toggleLang}
+          aria-label="Toggle language"
+        >
+          <span className="lang_icon">🌐</span>
+          <span className="lang_text">{t.toggle}</span>
+        </button>
+      </Nav>
       <div className="main_content">
         <Header name={pageTitle}>
-          <button className="lang_btn" onClick={toggleLang}>
-            {t.toggle}
-          </button>
+          {/* <button
+            className="lang_toggle"
+            onClick={toggleLang}
+            aria-label="Toggle language"
+          >
+            <span className="lang_icon">🌐</span>
+            <span className="lang_text">{t.toggle}</span>
+          </button> */}
         </Header>
         <MainContent>
           <Routes>
