@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import type { Dictionary } from "../i18n/i18n";
+import { type ReactNode } from "react";
 
 type NavTexts = Dictionary["nav"];
 
@@ -7,9 +8,10 @@ type NavProps = {
   name: string;
   description: string;
   t: NavTexts;
+  children?: ReactNode;
 };
 
-export default function Nav({ name, description, t }: NavProps) {
+export default function Nav({ name, description, t, children }: NavProps) {
   return (
     <nav className="sidebar">
       <div className="upper_sidebar">
@@ -70,6 +72,7 @@ export default function Nav({ name, description, t }: NavProps) {
           </NavLink>
         </ul>
       </div>
+      <div className="sidebar_footer">{children}</div>
     </nav>
   );
 }

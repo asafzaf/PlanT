@@ -1,16 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "../hooks/authHook";
-import { useI18n } from "../i18n/useI18n";
+import { useLogin } from "../../hooks/authHook";
 import type { IUserLoginDTO } from "@shared/types";
-import "./LoginPage.css";
+import { useI18n } from "../../i18n/useI18n";
 
 export default function LoginPage() {
+  const { t, toggleLang } = useI18n();
+
   const navigate = useNavigate();
-  const { t } = useI18n();
-
   const loginMutation = useLogin();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{
@@ -60,13 +58,20 @@ export default function LoginPage() {
   return (
     <div className="auth_container">
       <div className="auth_card">
-        <h1 className="auth_title">{"Login"}</h1>
-
+        <button
+          className="lang_toggle"
+          onClick={toggleLang}
+          aria-label="Toggle language"
+        >
+          <span className="lang_icon">🌐</span>
+          <span className="lang_text">{t.toggle}</span>
+        </button>
+        <h1 className="auth_title">{t.common.login}</h1>
         <form onSubmit={handleSubmit} className="auth_form">
           {/* Email */}
           <div className="form_group">
             <label htmlFor="email" className="form_label">
-              Email
+              {t.common.email}
             </label>
             <input
               id="email"
@@ -85,7 +90,7 @@ export default function LoginPage() {
           {/* Password */}
           <div className="form_group">
             <label htmlFor="password" className="form_label">
-              Password
+              {t.common.password}
             </label>
             <input
               id="password"
@@ -119,20 +124,6 @@ export default function LoginPage() {
             {loginMutation.isPending ? "Logging in..." : "Login"}
           </button>
         </form>
-
-        <div className="auth_footer">
-          <p>
-            Don&apos;t have an account?{" "}
-            <button
-              type="button"
-              className="auth_link_btn"
-              onClick={() => navigate("/register")}
-              disabled={loginMutation.isPending}
-            >
-              Sign up
-            </button>
-          </p>
-        </div>
       </div>
     </div>
   );
