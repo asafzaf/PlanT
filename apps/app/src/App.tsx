@@ -1,5 +1,11 @@
 import "./App.css";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+  matchPath,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import MainContent from "./components/MainContent";
@@ -23,20 +29,17 @@ function App() {
   const location = useLocation();
 
   function getPageTitle(pathname: string): string {
-    switch (pathname) {
-      case "/":
-        return t.nav.dashboard;
-      case "/projects":
-        return t.nav.projects;
-      case "/expenses":
-        return t.nav.expenses;
-      case "/income":
-        return t.nav.incomes;
-      case "/monthly":
-        return t.nav.monthly;
-      default:
-        return t.nav.dashboard;
-    }
+    if (matchPath("/", pathname)) return t.nav.dashboard;
+    if (matchPath("/projects", pathname)) return t.nav.projects;
+    if (matchPath("/projects/new", pathname))
+      return t.nav.newProject ?? "New project";
+    if (matchPath("/projects/:internalId", pathname))
+      return t.nav.projectDetails ?? "Project details";
+    if (matchPath("/expenses", pathname)) return t.nav.expenses;
+    if (matchPath("/income", pathname)) return t.nav.incomes;
+    if (matchPath("/monthly", pathname)) return t.nav.monthly;
+
+    return t.nav.dashboard;
   }
 
   const pageTitle = getPageTitle(location.pathname);

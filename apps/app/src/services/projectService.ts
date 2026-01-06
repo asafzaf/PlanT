@@ -19,4 +19,16 @@ export const ProjectService = {
     const { data } = await authApi.post<IProject>("/projects", payload);
     return data;
   },
+
+  updateProject: async (project: IProject) => {
+    const { data } = await authApi.put<IProject>(
+      `/projects/${project.internalId}`,
+      project
+    );
+    return data;
+  },
+
+  deleteProject: async (internalId: string) => {
+    await authApi.delete(`/projects/${internalId}`);
+  },
 };

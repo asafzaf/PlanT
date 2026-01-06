@@ -7,7 +7,9 @@
     "projects": "פרויקטים",
     "expenses": "הוצאות",
     "incomes": "הכנסות",
-    "monthly": "מעקב חודשי"
+    "monthly": "מעקב חודשי",
+    "projectDetails": "פרטי פרויקט",
+    "newProject": "פרויקט חדש"
   },
   "toggle": "עברית",
   "cardData": [
@@ -164,6 +166,8 @@
     "description": "תיאור",
     "status": "סטטוס",
     "customer": "לקוח",
-    "address": "כתובת"
+    "address": "כתובת",
+    "name": "שם",
+    "deleteConfirm": "האם אתה בטוח שברצונך למחוק את הפרויקט הזה?"
   }
 }

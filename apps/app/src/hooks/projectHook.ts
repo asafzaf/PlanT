@@ -32,3 +32,32 @@ export const useCreateProject = () => {
     },
   });
 };
+
+export const useUpdateProject = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<IProject, Error, IProject>({
+    mutationFn: (project) => ProjectService.updateProject(project),
+    onSuccess: (updatedProject) => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      queryClient.invalidateQueries({
+        queryKey: ["projects", updatedProject.internalId],
+      });
+      return updatedProject;
+    },
+  });
+};
+
+export const useDeleteProject = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, string>({
+    mutationFn: (internalId) => ProjectService.deleteProject(internalId),
+    onSuccess: (_, internalId) => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      queryClient.invalidateQueries({
+        queryKey: ["projects", internalId],
+      });
+    },
+  });
+};
