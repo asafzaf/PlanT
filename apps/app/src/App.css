@@ -1031,3 +1031,49 @@ main {
   font-size: 12px;
   color: #d00;
 }
+
+/* =========================
+   PROJECT DETAILS PAGE
+   ========================= */
+.project_details_container {
+  max-width: 980px;
+  margin: 10px;
+  padding: 16px;
+}
+
+.details_card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+}
+
+.details_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.details_item {
+  padding: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+}
+
+.details_label {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+.details_value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+}
+
+.details_section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}

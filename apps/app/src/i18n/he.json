@@ -156,5 +156,14 @@
 
     "actions": "פעולות",
     "required": "שדה חובה"
+  },
+  "projectsDetails": {
+    "projectIdLabel": "מזהה פרויקט",
+    "phone": "טלפון",
+    "email": "אימייל",
+    "description": "תיאור",
+    "status": "סטטוס",
+    "customer": "לקוח",
+    "address": "כתובת"
   }
 }

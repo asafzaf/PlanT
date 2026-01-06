@@ -156,5 +156,14 @@
 
     "actions": "Actions",
     "required": "Required"
+  },
+  "projectsDetails": {
+    "projectIdLabel": "Project ID",
+    "phone": "Phone",
+    "email": "Email",
+    "description": "Description",
+    "status": "Status",
+    "customer": "Customer",
+    "address": "Address"
   }
 }

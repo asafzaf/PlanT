@@ -5,29 +5,22 @@ import Nav from "./components/Nav";
 import MainContent from "./components/MainContent";
 import Dashboard from "../src/components/Pages/Dashborad";
 import Projects from "../src/components/Pages/Projects";
+import ProjectDetails from "../src/components/Pages/ProjectDetails";
 import CreateProject from "../src/components/Pages/CreateProject";
 import LoginPage from "../src/pages/LoginPage";
 import { useI18n } from "./i18n/useI18n";
-import { useUsers } from "./hooks/userHook.ts";
 import { useAuth } from "./context/AuthContext";
 
-// Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, isAuthenticated } = useAuth();
-
+  const { isAuthenticated } = useAuth();
   if (!isAuthenticated) return <Navigate to="/login" replace />;
-
   return <>{children}</>;
 }
 
 function App() {
   const { t, toggleLang } = useI18n();
-  // const { data: users, error, isLoading } = useUsers();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth(); // use user later to show dynamic business name/description
   const location = useLocation();
-
-  // if (isLoading) return <div>Loading users...</div>;
-  // if (error) return <div>Error loading users: {error.message}</div>;
 
   function getPageTitle(pathname: string): string {
     switch (pathname) {
@@ -48,7 +41,6 @@ function App() {
 
   const pageTitle = getPageTitle(location.pathname);
 
-  // If not authenticated, show only login route
   if (!isAuthenticated) {
     return (
       <Routes>
@@ -58,12 +50,11 @@ function App() {
     );
   }
 
-  // If authenticated, show main app layout with protected routes
   return (
     <div className="app_container">
       <Nav
-        name={t.businessName}
-        description={t.businessDescription}
+        name={t.businessName} // need to be changed dynamically
+        description={t.businessDescription} // need to be changed dynamically
         t={t.nav}
       ></Nav>
       <div className="main_content">
@@ -74,7 +65,6 @@ function App() {
         </Header>
         <MainContent>
           <Routes>
-            {/* Protected Routes */}
             <Route
               path="/"
               element={
@@ -99,11 +89,17 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/projects/:internalId"
+              element={
+                <ProtectedRoute>
+                  <ProjectDetails t={t} />
+                </ProtectedRoute>
+              }
+            />
             {/* <Route path="/expenses" element={<ProtectedRoute><ExpensesPage /></ProtectedRoute>} /> */}
             {/* <Route path="/income" element={<ProtectedRoute><IncomePage /></ProtectedRoute>} /> */}
             {/* <Route path="/monthly" element={<ProtectedRoute><MonthlyPage /></ProtectedRoute>} /> */}
-
-            {/* Redirect unknown routes to dashboard */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </MainContent>

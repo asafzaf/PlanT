@@ -11,6 +11,7 @@ export const ProjectService = {
     const { data } = await authApi.get<IProject>(
       `/projects/internal/${internalId}`
     );
+    console.log("Fetched project:", data);
     return data;
   },
 

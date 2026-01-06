@@ -32,6 +32,8 @@ services:
       - ../../apps/app:/app
       - ../../shared:/shared
       - /app/node_modules
+    env_file:
+      - ../../config/env/dev-local/.env
     environment:
       - CHOKIDAR_USEPOLLING=true
       - VITE_REACT_APP_API_URL=${VITE_REACT_APP_API_URL}

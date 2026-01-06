@@ -11,12 +11,13 @@ export const useProjects = () => {
   });
 };
 
-export const useProjectByInternalId = (internalId: string) => {
+export const useProjectByInternalId = (internalId?: string) => {
   return useQuery<IProject, Error>({
     queryKey: ["projects", internalId],
-    queryFn: () => ProjectService.getProjectByInternalId(internalId),
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes cache
+    queryFn: () => ProjectService.getProjectByInternalId(internalId!),
+    enabled: !!internalId, // 👈 key line
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 };
 
