@@ -12,7 +12,14 @@ export class AuthController {
   // REGISTER
   public register = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { firstName, lastName, email, password } = req.body;
+      const {
+        firstName,
+        lastName,
+        email,
+        password,
+        businessName,
+        businessDescription,
+      } = req.body;
 
       // Check if user exists
       const existing = await this.userService.getUserByEmail(email);
@@ -21,10 +28,19 @@ export class AuthController {
       }
 
       // Create user
-      const newUser = await this.userService.createUser({ firstName, lastName, email, password });
-
+      const newUser = await this.userService.createUser({
+        firstName,
+        lastName,
+        email,
+        password,
+        businessName,
+        businessDescription,
+      });
       // Sign JWT
-      const token = JwtService.getInstance().sign({ id: newUser.internalId, email: newUser.email });
+      const token = JwtService.getInstance().sign({
+        id: newUser.internalId,
+        email: newUser.email,
+      });
 
       res.status(201).json({
         user: newUser,
@@ -45,13 +61,19 @@ export class AuthController {
         return res.status(401).json({ message: "Invalid credentials" });
       }
 
-      const isMatch = await this.userService.validatePassword(user.internalId, password);
+      const isMatch = await this.userService.validatePassword(
+        user.internalId,
+        password
+      );
       if (!isMatch) {
         return res.status(401).json({ message: "Invalid credentials" });
       }
 
       // Sign JWT
-      const token = JwtService.getInstance().sign({ id: user.internalId, email: user.email });
+      const token = JwtService.getInstance().sign({
+        id: user.internalId,
+        email: user.email,
+      });
 
       res.json({
         user,

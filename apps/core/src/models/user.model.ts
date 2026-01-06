@@ -30,6 +30,8 @@ export const UserSchema = new Schema<IUserDB, IUserModel>(
     password: { type: String, required: true, select: false },
     role: { type: String, enum: ["admin", "user", "guest"], default: "user" },
     isActive: { type: Boolean, default: true },
+    businessName: { type: String, required: true },
+    businessDescription: { type: String },
   },
   {
     timestamps: true,

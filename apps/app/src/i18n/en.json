@@ -1,7 +1,6 @@
 {
-  "userName": "Yossi",
-  "businessName": "Atias & Mor",
-  "businessDescription": "Welcome to my application",
+  "businessName": "Business Name",
+  "businessDescription": "Business Description",
   "nav": {
     "dashboard": "Dashboard",
     "projects": "Projects",
