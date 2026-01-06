@@ -25,7 +25,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
 function App() {
   const { t, toggleLang } = useI18n();
-  const { user, isAuthenticated } = useAuth(); // use user later to show dynamic business name/description
+  const { user, isAuthenticated } = useAuth();
   const location = useLocation();
 
   function getPageTitle(pathname: string): string {
@@ -56,8 +56,8 @@ function App() {
   return (
     <div className="app_container">
       <Nav
-        name={t.businessName} // need to be changed dynamically
-        description={t.businessDescription} // need to be changed dynamically
+        name={user?.businessName ?? t.businessName}
+        description={user?.businessDescription ?? t.businessDescription}
         t={t.nav}
       ></Nav>
       <div className="main_content">

@@ -13,6 +13,8 @@ export interface IUserCreateDTO {
   lastName: string;
   email: string;
   password: string;
+  businessName: string;
+  businessDescription?: string;
 }
 
 export interface IUserUpdateDTO {
@@ -22,6 +24,8 @@ export interface IUserUpdateDTO {
   password?: string;
   role?: "admin" | "user" | "guest";
   isActive?: boolean;
+  businessName?: string;
+  businessDescription?: string;
 }
 
 export interface IUser {
@@ -33,4 +37,6 @@ export interface IUser {
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
+  businessName: string;
+  businessDescription?: string;
 }

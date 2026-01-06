@@ -1,7 +1,6 @@
 {
-  "userName": "יוסי",
-  "businessName": "Atias & Mor",
-  "businessDescription": "ניהול שיפוצים",
+  "businessName": "שם העסק",
+  "businessDescription": "תיאור העסק",
   "nav": {
     "dashboard": "לוח בקרה",
     "projects": "פרויקטים",
