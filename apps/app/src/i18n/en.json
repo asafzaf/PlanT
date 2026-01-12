@@ -173,46 +173,29 @@
   },
   "expensesPage": {
     "searchPlaceholder": "Search expenses...",
-    "allCategories": "All categories",
-    "allAllocationTypes": "All allocation types",
     "clear": "Clear",
     "newExpense": "New expense",
     "expenses": "expenses",
 
-    "columns": {
-      "description": "Description",
-      "amount": "Amount",
-      "category": "Category",
-      "allocation": "Project allocation",
-      "deductible": "Deductible"
-    },
-
-    "categories": {
-      "software": "Software",
-      "hardware": "Hardware",
-      "contractor": "Contractor",
-      "marketing": "Marketing",
-      "travel": "Travel",
-      "office": "Office",
-      "utilities": "Utilities",
-      "general": "General",
+    "sections": {
+      "projects": "Projects",
       "other": "Other"
     },
 
-    "allocationTypes": {
-      "general": "General",
-      "single": "Single project",
+    "columns": {
+      "amount": "Amount",
+      "description": "Description",
+      "date": "Date"
+    },
+
+    "projectGroup": {
+      "projectPrefix": "Project",
       "multiple": "Multiple projects"
     },
 
-    "allocation": {
-      "general": "General expense",
-      "multiple": "Multiple projects"
-    },
-
-    "deductible": {
-      "yes": "Yes",
-      "no": "No"
+    "empty": {
+      "projects": "No project-related expenses found.",
+      "other": "No other expenses found."
     }
   }
 }

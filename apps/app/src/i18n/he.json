@@ -173,46 +173,29 @@
   },
   "expensesPage": {
     "searchPlaceholder": "חיפוש הוצאה...",
-    "allCategories": "כל הקטגוריות",
-    "allAllocationTypes": "כל סוגי השיוך",
     "clear": "נקה",
     "newExpense": "הוצאה חדשה",
     "expenses": "הוצאות",
 
-    "columns": {
-      "description": "תיאור",
-      "amount": "סכום",
-      "category": "קטגוריה",
-      "allocation": "שיוך לפרויקט",
-      "deductible": "מוכר למס"
-    },
-
-    "categories": {
-      "software": "תוכנה",
-      "hardware": "חומרה",
-      "contractor": "קבלן",
-      "marketing": "שיווק",
-      "travel": "נסיעות",
-      "office": "משרד",
-      "utilities": "הוצאות שוטפות",
-      "general": "כללי",
+    "sections": {
+      "projects": "פרויקטים",
       "other": "אחר"
     },
 
-    "allocationTypes": {
-      "general": "כללי",
-      "single": "פרויקט אחד",
+    "columns": {
+      "amount": "סכום",
+      "description": "תיאור",
+      "date": "תאריך"
+    },
+
+    "projectGroup": {
+      "projectPrefix": "פרויקט",
       "multiple": "מספר פרויקטים"
     },
 
-    "allocation": {
-      "general": "הוצאה כללית",
-      "multiple": "מספר פרויקטים"
-    },
-
-    "deductible": {
-      "yes": "כן",
-      "no": "לא"
+    "empty": {
+      "projects": "לא נמצאו הוצאות משויכות לפרויקטים.",
+      "other": "לא נמצאו הוצאות אחרות."
     }
   }
 }

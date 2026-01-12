@@ -2,53 +2,25 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plus } from "lucide-react";
 
-import type { IExpense } from "@shared/types";
+import type { IExpense } from "@shared/types"; // adjust if needed
 import type { Dictionary } from "../../i18n/i18n";
-
 import { useExpenses } from "../../hooks/expenseHook";
 
 type Props = { t: Dictionary };
 
-const CATEGORIES: Array<IExpense["category"]> = [
-  "software",
-  "hardware",
-  "contractor",
-  "marketing",
-  "travel",
-  "office",
-  "utilities",
-  "general",
-  "other",
-];
-
-const ALLOCATION_TYPES: Array<IExpense["allocationType"]> = [
-  "general",
-  "single",
-  "multiple",
-];
-
 export default function ExpensesPage({ t }: Props) {
   const navigate = useNavigate();
-
-  // same vibe as projects page: fetch -> filter -> render
   const { data: expenses = [] } = useExpenses();
 
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<IExpense["category"] | "">("");
-  const [allocationType, setAllocationType] = useState<
-    IExpense["allocationType"] | ""
-  >("");
 
-  const filteredExpenses = useMemo(() => {
-    const s = search.trim().toLowerCase();
-
-    return expenses.filter((e) => {
-      if (s && !(e.description ?? "").toLowerCase().includes(s)) return false;
-      if (category && e.category !== category) return false;
-      if (allocationType && e.allocationType !== allocationType) return false;
-      return true;
-    });
-  }, [expenses, search, category, allocationType]);
+  // simple format (you can later replace with i18n locale formatting)
+  const formatDate = (value: Date) => {
+    if (!value) return "-";
+    const d = new Date(value as Date);
+    if (Number.isNaN(d.getTime())) return "-";
+    return d.toLocaleDateString();
+  };
 
   const formatAmount = (amount: number) => {
     const n = Number(amount);
@@ -56,17 +28,63 @@ export default function ExpensesPage({ t }: Props) {
     return n.toLocaleString();
   };
 
-  const allocationLabel = (e: IExpense) => {
-    const alloc = e.projectAllocations ?? [];
-    if (!alloc.length) return t.expensesPage.allocation.general;
-    if (alloc.length === 1) return alloc[0].projectId; // later: map id -> project name
-    return `${t.expensesPage.allocation.multiple} (${alloc.length})`;
-  };
+  const filteredExpenses = useMemo(() => {
+    const s = search.trim().toLowerCase();
+    if (!s) return expenses;
+
+    return expenses.filter((e) =>
+      (e.description ?? "").toLowerCase().includes(s)
+    );
+  }, [expenses, search]);
+
+  // Split into: project-associated vs other
+  const { projectGroups, otherExpenses } = useMemo(() => {
+    const groups: Record<string, IExpense[]> = {};
+    const other: IExpense[] = [];
+
+    for (const e of filteredExpenses) {
+      const allocs = e.projectAllocations ?? [];
+
+      // "Other" = no project association
+      if (allocs.length === 0) {
+        other.push(e);
+        continue;
+      }
+
+      // Group by projectId(s)
+      // - if single allocation => group by that projectId
+      // - if multiple allocations => place under "multiple"
+      if (allocs.length === 1) {
+        const pid = allocs[0].projectId || "unknown";
+        (groups[pid] ??= []).push(e);
+      } else {
+        const pid = "__multiple__";
+        (groups[pid] ??= []).push(e);
+      }
+    }
+
+    return { projectGroups: groups, otherExpenses: other };
+  }, [filteredExpenses]);
+
+  const projectGroupEntries = useMemo(() => {
+    const entries = Object.entries(projectGroups);
+
+    // Sort so "multiple" goes last, and projectIds alphabetically
+    return entries.sort(([a], [b]) => {
+      if (a === "__multiple__") return 1;
+      if (b === "__multiple__") return -1;
+      return a.localeCompare(b);
+    });
+  }, [projectGroups]);
+
+  const projectsCount = useMemo(() => {
+    return projectGroupEntries.reduce((sum, [, arr]) => sum + arr.length, 0);
+  }, [projectGroupEntries]);
 
   return (
     <div className="main_container">
       <div className="project_container">
-        {/* Filters */}
+        {/* Filters (same style as projects page) */}
         <div className="projects_toolbar">
           <input
             className="projects_search"
@@ -75,46 +93,7 @@ export default function ExpensesPage({ t }: Props) {
             onChange={(e) => setSearch(e.target.value)}
           />
 
-          <select
-            className="projects_select"
-            value={category}
-            onChange={(e) =>
-              setCategory(e.target.value as IExpense["category"] | "")
-            }
-          >
-            <option value="">{t.expensesPage.allCategories}</option>
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {t.expensesPage.categories[c]}
-              </option>
-            ))}
-          </select>
-
-          <select
-            className="projects_select"
-            value={allocationType}
-            onChange={(e) =>
-              setAllocationType(
-                e.target.value as IExpense["allocationType"] | ""
-              )
-            }
-          >
-            <option value="">{t.expensesPage.allAllocationTypes}</option>
-            {ALLOCATION_TYPES.map((a) => (
-              <option key={a} value={a}>
-                {t.expensesPage.allocationTypes[a]}
-              </option>
-            ))}
-          </select>
-
-          <button
-            className="projects_clear"
-            onClick={() => {
-              setSearch("");
-              setCategory("");
-              setAllocationType("");
-            }}
-          >
+          <button className="projects_clear" onClick={() => setSearch("")}>
             {t.expensesPage.clear}
           </button>
 
@@ -132,51 +111,137 @@ export default function ExpensesPage({ t }: Props) {
           </div>
         </div>
 
-        {/* Header titles (reuse same classes) */}
+        {/* =========================
+            SECTION: Projects
+           ========================= */}
         <div className="projects_header">
-          <div className="col name">{t.expensesPage.columns.description}</div>
+          <div className="col name">
+            {t.expensesPage.sections.projects} ({projectsCount})
+          </div>
           <div className="col status">{t.expensesPage.columns.amount}</div>
-          <div className="col customer">{t.expensesPage.columns.category}</div>
-          <div className="col address">{t.expensesPage.columns.allocation}</div>
+          <div className="col customer">
+            {t.expensesPage.columns.description}
+          </div>
+          <div className="col address">{t.expensesPage.columns.date}</div>
         </div>
 
-        {/* Rows */}
         <div className="projects_container">
-          {filteredExpenses.map((expense) => (
-            <div
-              className="project_row"
-              key={expense.internalId}
-              role="button"
-              tabIndex={0}
-              onClick={() => navigate(`/expenses/${expense.internalId}`)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ")
-                  navigate(`/expenses/${expense.internalId}`);
-              }}
-            >
-              <div className="cell name">{expense.description ?? "-"}</div>
-
-              <div className="cell status">
-                {formatAmount(expense.amount)} {expense.currency ?? ""}
-              </div>
-
-              <div className="cell customer">
-                {expense.category
-                  ? t.expensesPage.categories[expense.category]
-                  : "-"}
-              </div>
-
-              <div className="cell address">{allocationLabel(expense)}</div>
-
-              {/* Second line (like project.description) */}
-              <div className="row_details">
-                {t.expensesPage.columns.deductible}:{" "}
-                {expense.isDeductible
-                  ? t.expensesPage.deductible.yes
-                  : t.expensesPage.deductible.no}
-              </div>
+          {projectGroupEntries.length === 0 ? (
+            <div className="project_row">
+              <div className="cell name">-</div>
+              <div className="cell status">-</div>
+              <div className="cell customer">-</div>
+              <div className="cell address">-</div>
+              <div className="row_details">{t.expensesPage.empty.projects}</div>
             </div>
-          ))}
+          ) : (
+            projectGroupEntries.map(([projectId, list]) => {
+              const title =
+                projectId === "__multiple__"
+                  ? t.expensesPage.projectGroup.multiple
+                  : `${t.expensesPage.projectGroup.projectPrefix} ${projectId}`;
+
+              return (
+                <div key={projectId}>
+                  {/* group title (uses row_details styling vibe) */}
+                  <div className="project_row" style={{ cursor: "default" }}>
+                    <div className="cell name">{title}</div>
+                    <div className="cell status"> </div>
+                    <div className="cell customer"> </div>
+                    <div className="cell address"> </div>
+                    <div className="row_details">
+                      {list.length} {t.expensesPage.expenses}
+                    </div>
+                  </div>
+
+                  {/* group rows */}
+                  {list.map((expense) => (
+                    <div
+                      className="project_row"
+                      key={expense.internalId}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() =>
+                        navigate(`/expenses/${expense.internalId}`)
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ")
+                          navigate(`/expenses/${expense.internalId}`);
+                      }}
+                    >
+                      <div className="cell name">
+                        {formatAmount(expense.amount)}
+                      </div>
+
+                      {/* keep same class names, just repurpose columns */}
+                      <div className="cell status">
+                        {expense.description ?? "-"}
+                      </div>
+                      <div className="cell customer">
+                        {formatDate(expense.expenseDate as Date)}
+                      </div>
+                      <div className="cell address"> </div>
+
+                      {/* optional: show category/deductible on second line */}
+                      {/* <div className="row_details">
+                        {t.expensesPage.meta.category}: {expense.category ?? "-"} •
+                        {t.expensesPage.meta.deductible}: {expense.isDeductible ? t.common.yes : t.common.no}
+                      </div> */}
+                    </div>
+                  ))}
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        {/* =========================
+            SECTION: Other
+           ========================= */}
+        <div className="projects_header" style={{ marginTop: 12 }}>
+          <div className="col name">
+            {t.expensesPage.sections.other} ({otherExpenses.length})
+          </div>
+          <div className="col status">{t.expensesPage.columns.amount}</div>
+          <div className="col customer">
+            {t.expensesPage.columns.description}
+          </div>
+          <div className="col address">{t.expensesPage.columns.date}</div>
+        </div>
+
+        <div className="projects_container">
+          {otherExpenses.length === 0 ? (
+            <div className="project_row">
+              <div className="cell name">-</div>
+              <div className="cell status">-</div>
+              <div className="cell customer">-</div>
+              <div className="cell address">-</div>
+              <div className="row_details">{t.expensesPage.empty.other}</div>
+            </div>
+          ) : (
+            otherExpenses.map((expense) => (
+              <div
+                className="project_row"
+                key={expense.internalId}
+                role="button"
+                tabIndex={0}
+                onClick={() => navigate(`/expenses/${expense.internalId}`)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ")
+                    navigate(`/expenses/${expense.internalId}`);
+                }}
+              >
+                <div className="cell name">
+                  {formatAmount(expense.amount)} {expense.currency ?? ""}
+                </div>
+                <div className="cell status">{expense.description ?? "-"}</div>
+                <div className="cell customer">
+                  {formatDate(expense.expenseDate as Date)}
+                </div>
+                <div className="cell address"> </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
