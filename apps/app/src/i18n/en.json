@@ -176,6 +176,7 @@
     "clear": "Clear",
     "newExpense": "New expense",
     "expenses": "expenses",
+    "totalLabel": "Total Expenses",
 
     "sections": {
       "projects": "Projects",

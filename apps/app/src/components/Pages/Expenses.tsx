@@ -152,6 +152,11 @@ export default function ExpensesPage({ t }: Props) {
           ) : (
             projectGroupEntries.map(([projectId, list]) => {
               // creates the projects title
+              const projectTotal = list.reduce(
+                (sum, e) => sum + (Number(e.amount) || 0),
+                0
+              );
+
               const title =
                 projectId === "__multiple__"
                   ? t.expensesPage.projectGroup.multiple
@@ -201,6 +206,7 @@ export default function ExpensesPage({ t }: Props) {
                   {/* Expenses under this project */}
                   {open && (
                     <>
+                      {/* columns labels */}
                       <div className="expenses_header">
                         <div className="col status">
                           {t.expensesPage.columns.amount}
@@ -212,7 +218,7 @@ export default function ExpensesPage({ t }: Props) {
                           {t.expensesPage.columns.date}
                         </div>
                       </div>
-
+                      {/* expenses list */}
                       {list.map((expense) => (
                         <div
                           className="project_row expense_row"
@@ -238,6 +244,23 @@ export default function ExpensesPage({ t }: Props) {
                           </div>
                         </div>
                       ))}
+                      {/* subtotal row */}
+                      <div className="total-amount-container">
+                        <div className="total_title">
+                          {t.expensesPage.totalLabel}
+                        </div>
+                        <div
+                          style={{ cursor: "default", paddingTop: "10px" }}
+                          onClick={(e) => e.stopPropagation()}
+                          role="presentation"
+                        >
+                          <div className="cell name">
+                            {formatAmount(projectTotal)}{" "}
+                            {list[0]?.currency ?? ""}
+                          </div>
+                          <div className="cell date" />
+                        </div>
+                      </div>
                     </>
                   )}
                 </div>

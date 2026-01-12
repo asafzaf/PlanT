@@ -176,6 +176,7 @@
     "clear": "נקה",
     "newExpense": "הוצאה חדשה",
     "expenses": "הוצאות",
+    "totalLabel": "סה״כ הוצאות",
 
     "sections": {
       "projects": "פרויקטים",
