@@ -170,5 +170,49 @@
     "address": "כתובת",
     "name": "שם",
     "deleteConfirm": "האם אתה בטוח שברצונך למחוק את הפרויקט הזה?"
+  },
+  "expensesPage": {
+    "searchPlaceholder": "חיפוש הוצאה...",
+    "allCategories": "כל הקטגוריות",
+    "allAllocationTypes": "כל סוגי השיוך",
+    "clear": "נקה",
+    "newExpense": "הוצאה חדשה",
+    "expenses": "הוצאות",
+
+    "columns": {
+      "description": "תיאור",
+      "amount": "סכום",
+      "category": "קטגוריה",
+      "allocation": "שיוך לפרויקט",
+      "deductible": "מוכר למס"
+    },
+
+    "categories": {
+      "software": "תוכנה",
+      "hardware": "חומרה",
+      "contractor": "קבלן",
+      "marketing": "שיווק",
+      "travel": "נסיעות",
+      "office": "משרד",
+      "utilities": "הוצאות שוטפות",
+      "general": "כללי",
+      "other": "אחר"
+    },
+
+    "allocationTypes": {
+      "general": "כללי",
+      "single": "פרויקט אחד",
+      "multiple": "מספר פרויקטים"
+    },
+
+    "allocation": {
+      "general": "הוצאה כללית",
+      "multiple": "מספר פרויקטים"
+    },
+
+    "deductible": {
+      "yes": "כן",
+      "no": "לא"
+    }
   }
 }

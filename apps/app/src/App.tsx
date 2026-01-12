@@ -11,6 +11,7 @@ import Nav from "./components/Nav";
 import MainContent from "./components/MainContent";
 import Dashboard from "../src/components/Pages/Dashborad";
 import Projects from "../src/components/Pages/Projects";
+import Expenses from "../src/components/Pages/Expenses";
 import ProjectDetails from "../src/components/Pages/ProjectDetails";
 import CreateProject from "../src/components/Pages/CreateProject";
 import LoginPage from "../src/components/Pages/LoginPage";
@@ -114,7 +115,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* <Route path="/expenses" element={<ProtectedRoute><ExpensesPage /></ProtectedRoute>} /> */}
+            <Route
+              path="/expenses"
+              element={
+                <ProtectedRoute>
+                  <Expenses t={t} />
+                </ProtectedRoute>
+              }
+            />
             {/* <Route path="/income" element={<ProtectedRoute><IncomePage /></ProtectedRoute>} /> */}
             {/* <Route path="/monthly" element={<ProtectedRoute><MonthlyPage /></ProtectedRoute>} /> */}
             <Route path="*" element={<Navigate to="/" replace />} />

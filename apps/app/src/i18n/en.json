@@ -170,5 +170,49 @@
     "address": "Address",
     "name": "Name",
     "deleteConfirm": "Are you sure you want to delete this project?"
+  },
+  "expensesPage": {
+    "searchPlaceholder": "Search expenses...",
+    "allCategories": "All categories",
+    "allAllocationTypes": "All allocation types",
+    "clear": "Clear",
+    "newExpense": "New expense",
+    "expenses": "expenses",
+
+    "columns": {
+      "description": "Description",
+      "amount": "Amount",
+      "category": "Category",
+      "allocation": "Project allocation",
+      "deductible": "Deductible"
+    },
+
+    "categories": {
+      "software": "Software",
+      "hardware": "Hardware",
+      "contractor": "Contractor",
+      "marketing": "Marketing",
+      "travel": "Travel",
+      "office": "Office",
+      "utilities": "Utilities",
+      "general": "General",
+      "other": "Other"
+    },
+
+    "allocationTypes": {
+      "general": "General",
+      "single": "Single project",
+      "multiple": "Multiple projects"
+    },
+
+    "allocation": {
+      "general": "General expense",
+      "multiple": "Multiple projects"
+    },
+
+    "deductible": {
+      "yes": "Yes",
+      "no": "No"
+    }
   }
 }
