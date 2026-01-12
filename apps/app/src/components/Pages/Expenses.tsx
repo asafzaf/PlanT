@@ -5,12 +5,20 @@ import { Plus } from "lucide-react";
 import type { IExpense } from "@shared/types"; // adjust if needed
 import type { Dictionary } from "../../i18n/i18n";
 import { useExpenses } from "../../hooks/expenseHook";
+import { useProjects } from "../../hooks/projectHook.ts";
 
 type Props = { t: Dictionary };
 
 export default function ExpensesPage({ t }: Props) {
   const navigate = useNavigate();
   const { data: expenses = [] } = useExpenses();
+  const { data: projects = [], error, isLoading } = useProjects();
+
+  const projectsById = useMemo(() => {
+    const map: Record<string, (typeof projects)[number]> = {};
+    for (const p of projects) map[p.internalId] = p;
+    return map;
+  }, [projects]);
 
   const [search, setSearch] = useState("");
 
@@ -81,6 +89,9 @@ export default function ExpensesPage({ t }: Props) {
     return projectGroupEntries.reduce((sum, [, arr]) => sum + arr.length, 0);
   }, [projectGroupEntries]);
 
+  if (isLoading) return <div>Loading projects...</div>;
+  if (error) return <div>Error loading projects: {error.message}</div>;
+
   return (
     <div className="main_container">
       <div className="project_container">
@@ -113,53 +124,56 @@ export default function ExpensesPage({ t }: Props) {
         {/* =========================
             SECTION: Projects
            ========================= */}
-        <div className="projects_header">
+        <div className="expenses_header">
           <div className="col name">
             {t.expensesPage.sections.projects} ({projectsCount})
           </div>
         </div>
 
-        <div className="projects_header">
-          <div className="col status">{t.expensesPage.columns.amount}</div>
-          <div className="col customer">
-            {t.expensesPage.columns.description}
-          </div>
-          <div className="col address">{t.expensesPage.columns.date}</div>
-        </div>
-
         <div className="projects_container">
           {projectGroupEntries.length === 0 ? (
+            // case empty
             <div className="project_row_expenses">
               <div className="cell name">-</div>
-              {/* <div className="cell status">-</div>
-              <div className="cell customer">-</div>
-              <div className="cell address">-</div>
-              <div className="row_details">{t.expensesPage.empty.projects}</div> */}
             </div>
           ) : (
             projectGroupEntries.map(([projectId, list]) => {
+              // creates the projects title
               const title =
                 projectId === "__multiple__"
                   ? t.expensesPage.projectGroup.multiple
-                  : `${t.expensesPage.projectGroup.projectPrefix} ${projectId}`;
+                  : (() => {
+                      const p = projectsById[projectId];
+                      if (!p)
+                        return `${t.expensesPage.projectGroup.projectPrefix} ${projectId}`;
+
+                      const name =
+                        p.name ??
+                        `${t.expensesPage.projectGroup.projectPrefix} ${projectId}`;
+                      const address = p.customerAddress ?? "-";
+
+                      return `${name} | ${address}`;
+                    })();
 
               return (
-                <div key={projectId}>
-                  {/* group title (uses row_details styling vibe) */}
-                  <div
-                    className="project_row_expenses"
-                    style={{ cursor: "default" }}
-                  >
+                // project title
+                <div key={projectId} className="expenses_section">
+                  <div className="project_row_expenses">
                     <div className="cell name">{title}</div>
-                    {/* <div className="cell status"> </div>
-                    <div className="cell customer"> </div>
-                    <div className="cell address"> </div>
-                    <div className="row_details">
-                      {list.length} {t.expensesPage.expenses}
-                    </div> */}
                   </div>
 
-                  {/* group rows */}
+                  {/* rows - each project expenses */}
+                  <div className="expenses_header">
+                    <div className="col status">
+                      {t.expensesPage.columns.amount}
+                    </div>
+                    <div className="col customer">
+                      {t.expensesPage.columns.description}
+                    </div>
+                    <div className="col address">
+                      {t.expensesPage.columns.date}
+                    </div>
+                  </div>
                   {list.map((expense) => (
                     <div
                       className="project_row expense_row"
@@ -174,24 +188,18 @@ export default function ExpensesPage({ t }: Props) {
                           navigate(`/expenses/${expense.internalId}`);
                       }}
                     >
+                      {/* expense amount */}
                       <div className="cell name">
                         {formatAmount(expense.amount)}
                       </div>
-
-                      {/* keep same class names, just repurpose columns */}
-                      <div className="cell status">
+                      {/* expense description */}
+                      <div className="cell description">
                         {expense.description ?? "-"}
                       </div>
-                      <div className="cell customer">
+                      {/* expense date */}
+                      <div className="cell date">
                         {formatDate(expense.expenseDate as Date)}
                       </div>
-                      <div className="cell address"> </div>
-
-                      {/* optional: show category/deductible on second line */}
-                      {/* <div className="row_details">
-                        {t.expensesPage.meta.category}: {expense.category ?? "-"} •
-                        {t.expensesPage.meta.deductible}: {expense.isDeductible ? t.common.yes : t.common.no}
-                      </div> */}
                     </div>
                   ))}
                 </div>
@@ -203,10 +211,12 @@ export default function ExpensesPage({ t }: Props) {
         {/* =========================
             SECTION: Other
            ========================= */}
-        <div className="projects_header" style={{ marginTop: 12 }}>
+        <div className="expenses_header" style={{ marginTop: 12 }}>
           <div className="col name">
             {t.expensesPage.sections.other} ({otherExpenses.length})
           </div>
+        </div>
+        <div className="expenses_header" style={{ marginTop: 12 }}>
           <div className="col status">{t.expensesPage.columns.amount}</div>
           <div className="col customer">
             {t.expensesPage.columns.description}

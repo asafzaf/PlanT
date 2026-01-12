@@ -1368,4 +1368,19 @@ main {
 }
 .expense_row {
   margin-top: 10px;
+  grid-template-columns: 1fr 1.5fr 1.5fr !important;
+}
+.expenses_header {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr;
+  gap: 16px;
+
+  padding: 10px 16px;
+  color: #7a7a7a;
+  font-size: 12px;
+  font-weight: 600;
+}
+.expenses_section {
+  margin-top: 16px;
+  padding-top: 12px;
 }
