@@ -196,6 +196,24 @@
     "empty": {
       "projects": "לא נמצאו הוצאות משויכות לפרויקטים.",
       "other": "לא נמצאו הוצאות אחרות."
+    },
+    "categories": {
+      "software": "תוכנה",
+      "hardware": "חומרה",
+      "contractor": "קבלן",
+      "marketing": "שיווק",
+      "travel": "נסיעות",
+      "office": "משרד",
+      "utilities": "שירותים",
+      "general": "כללי",
+      "other": "אחר"
+    },
+    "form": {
+      "association": "שייכות",
+      "project": "פרויקט",
+      "selectProject": "בחר פרויקט",
+      "category": "קטגוריה",
+      "selectCategory": "בחר קטגוריה"
     }
   }
 }

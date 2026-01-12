@@ -1,9 +1,14 @@
 import { authApi } from "../utils/api";
-import type { IExpense } from "@shared/types";
+import type { IExpense, IExpenseCreateDTO } from "@shared/types";
 
 export const ExpenseService = {
   listExpenses: async () => {
     const { data } = await authApi.get<IExpense[]>("/expenses");
+    return data;
+  },
+
+  createExpense: async (payload: IExpenseCreateDTO) => {
+    const { data } = await authApi.post<IExpense>("/expenses", payload);
     return data;
   },
 

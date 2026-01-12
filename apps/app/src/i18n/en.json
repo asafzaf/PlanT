@@ -196,6 +196,24 @@
     "empty": {
       "projects": "No project-related expenses found.",
       "other": "No other expenses found."
+    },
+    "categories": {
+      "software": "Software",
+      "hardware": "Hardware",
+      "contractor": "Contractor",
+      "marketing": "Marketing",
+      "travel": "Travel",
+      "office": "Office",
+      "utilities": "Utilities",
+      "general": "General",
+      "other": "Other"
+    },
+    "form": {
+      "association": "Association",
+      "project": "Project",
+      "selectProject": "Select a project",
+      "category": "Category",
+      "selectCategory": "Select a category"
     }
   }
 }

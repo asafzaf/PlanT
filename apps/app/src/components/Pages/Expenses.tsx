@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plus } from "lucide-react";
-
-import type { IExpense } from "@shared/types"; // adjust if needed
+import { ChevronDown, ChevronLeft } from "lucide-react";
+import type { IExpense } from "@shared/types";
 import type { Dictionary } from "../../i18n/i18n";
 import { useExpenses } from "../../hooks/expenseHook";
 import { useProjects } from "../../hooks/projectHook.ts";
@@ -21,6 +21,19 @@ export default function ExpensesPage({ t }: Props) {
   }, [projects]);
 
   const [search, setSearch] = useState("");
+
+  // per-project dropdown state: { [projectId]: boolean }
+  const [openProjects, setOpenProjects] = useState<Record<string, boolean>>({});
+
+  // helper: default open = true if not set yet
+  const isProjectOpen = (projectId: string) => openProjects[projectId] ?? true;
+
+  const toggleProjectOpen = (projectId: string) => {
+    setOpenProjects((prev) => ({
+      ...prev,
+      [projectId]: !(prev[projectId] ?? true),
+    }));
+  };
 
   // simple format (you can later replace with i18n locale formatting)
   const formatDate = (value: Date) => {
@@ -154,54 +167,79 @@ export default function ExpensesPage({ t }: Props) {
 
                       return `${name} | ${address}`;
                     })();
+              const open = isProjectOpen(projectId);
+              //   const chevron = open ? "▾" : "▸";
 
               return (
-                // project title
                 <div key={projectId} className="expenses_section">
-                  <div className="project_row_expenses">
-                    <div className="cell name">{title}</div>
+                  {/* Project header (click to open/close) */}
+                  <div
+                    className="project_row_expenses"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => toggleProjectOpen(projectId)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ")
+                        toggleProjectOpen(projectId);
+                    }}
+                    style={{ cursor: "pointer", userSelect: "none" }}
+                    aria-expanded={open}
+                  >
+                    <div
+                      className="cell name"
+                      style={{ display: "flex", alignItems: "center", gap: 6 }}
+                    >
+                      {open ? (
+                        <ChevronDown size={16} strokeWidth={2.5} />
+                      ) : (
+                        <ChevronLeft size={16} strokeWidth={2.5} />
+                      )}
+                      {title}
+                    </div>
                   </div>
 
-                  {/* rows - each project expenses */}
-                  <div className="expenses_header">
-                    <div className="col status">
-                      {t.expensesPage.columns.amount}
-                    </div>
-                    <div className="col customer">
-                      {t.expensesPage.columns.description}
-                    </div>
-                    <div className="col address">
-                      {t.expensesPage.columns.date}
-                    </div>
-                  </div>
-                  {list.map((expense) => (
-                    <div
-                      className="project_row expense_row"
-                      key={expense.internalId}
-                      role="button"
-                      tabIndex={0}
-                      onClick={() =>
-                        navigate(`/expenses/${expense.internalId}`)
-                      }
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ")
-                          navigate(`/expenses/${expense.internalId}`);
-                      }}
-                    >
-                      {/* expense amount */}
-                      <div className="cell name">
-                        {formatAmount(expense.amount)}
+                  {/* Expenses under this project */}
+                  {open && (
+                    <>
+                      <div className="expenses_header">
+                        <div className="col status">
+                          {t.expensesPage.columns.amount}
+                        </div>
+                        <div className="col customer">
+                          {t.expensesPage.columns.description}
+                        </div>
+                        <div className="col address">
+                          {t.expensesPage.columns.date}
+                        </div>
                       </div>
-                      {/* expense description */}
-                      <div className="cell description">
-                        {expense.description ?? "-"}
-                      </div>
-                      {/* expense date */}
-                      <div className="cell date">
-                        {formatDate(expense.expenseDate as Date)}
-                      </div>
-                    </div>
-                  ))}
+
+                      {list.map((expense) => (
+                        <div
+                          className="project_row expense_row"
+                          key={expense.internalId}
+                          role="button"
+                          tabIndex={0}
+                          onClick={() =>
+                            navigate(`/expenses/${expense.internalId}`)
+                          }
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ")
+                              navigate(`/expenses/${expense.internalId}`);
+                          }}
+                        >
+                          <div className="cell name">
+                            {formatAmount(expense.amount)}
+                          </div>
+                          <div className="cell description">
+                            {expense.description ?? "-"}
+                          </div>
+                          <div className="cell date">
+                            {formatDate(expense.expenseDate as Date)}
+                          </div>
+                        </div>
+                      ))}
+                    </>
+                  )}
                 </div>
               );
             })
