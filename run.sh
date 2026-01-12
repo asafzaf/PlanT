@@ -5,9 +5,21 @@
 
 set -e
 
+# Build settings (fixes "provenance" hang + enables fast builds)
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+export BUILDX_NO_DEFAULT_ATTESTATIONS=1
+
 COMMAND=$1
 ENV=${2:-dev-local}   # default environment is dev-local
 COMPOSE_FILE="./development/$ENV/docker-compose.yml"
+ENV_FILE="./config/env/$ENV/.env"
+
+# Validate command
+if [[ -z "$COMMAND" ]]; then
+  echo "Usage: $0 {start|stop|restart|down|logs} [dev-local|stage|prod]"
+  exit 1
+fi
 
 # Validate environment
 if [[ ! "$ENV" =~ ^(dev-local|stage|prod)$ ]]; then
@@ -21,31 +33,41 @@ if [ ! -f "$COMPOSE_FILE" ]; then
   exit 1
 fi
 
+# Check if env file exists (used for ${...} substitution like VITE_REACT_APP_API_URL)
+if [ ! -f "$ENV_FILE" ]; then
+  echo "Error: Env file $ENV_FILE not found!"
+  exit 1
+fi
+
+# Use Docker Compose v2 ("docker compose"). If you only have legacy docker-compose installed,
+# you can swap these lines back to docker-compose and remove --env-file if unsupported.
+DC="docker compose --env-file $ENV_FILE -f $COMPOSE_FILE"
+
 case "$COMMAND" in
   start)
     echo "Starting stack with environment: $ENV"
-    docker-compose -f "$COMPOSE_FILE" up --build -d
+    $DC up --build -d
     ;;
 
   stop)
     echo "Stopping stack with environment: $ENV"
-    docker-compose -f "$COMPOSE_FILE" stop
+    $DC stop
     ;;
 
   restart)
     echo "Restarting stack with environment: $ENV"
-    docker-compose -f "$COMPOSE_FILE" down
-    docker-compose -f "$COMPOSE_FILE" up --build -d
+    $DC down
+    $DC up --build -d
     ;;
 
   down)
     echo "Tearing down stack with environment: $ENV"
-    docker-compose -f "$COMPOSE_FILE" down
+    $DC down
     ;;
 
   logs)
     echo "Following logs for environment: $ENV"
-    docker-compose -f "$COMPOSE_FILE" logs -f
+    $DC logs -f
     ;;
 
   *)
