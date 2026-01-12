@@ -84,7 +84,6 @@ export default function ExpensesPage({ t }: Props) {
   return (
     <div className="main_container">
       <div className="project_container">
-        {/* Filters (same style as projects page) */}
         <div className="projects_toolbar">
           <input
             className="projects_search"
@@ -118,6 +117,9 @@ export default function ExpensesPage({ t }: Props) {
           <div className="col name">
             {t.expensesPage.sections.projects} ({projectsCount})
           </div>
+        </div>
+
+        <div className="projects_header">
           <div className="col status">{t.expensesPage.columns.amount}</div>
           <div className="col customer">
             {t.expensesPage.columns.description}
@@ -127,12 +129,12 @@ export default function ExpensesPage({ t }: Props) {
 
         <div className="projects_container">
           {projectGroupEntries.length === 0 ? (
-            <div className="project_row">
+            <div className="project_row_expenses">
               <div className="cell name">-</div>
-              <div className="cell status">-</div>
+              {/* <div className="cell status">-</div>
               <div className="cell customer">-</div>
               <div className="cell address">-</div>
-              <div className="row_details">{t.expensesPage.empty.projects}</div>
+              <div className="row_details">{t.expensesPage.empty.projects}</div> */}
             </div>
           ) : (
             projectGroupEntries.map(([projectId, list]) => {
@@ -144,20 +146,23 @@ export default function ExpensesPage({ t }: Props) {
               return (
                 <div key={projectId}>
                   {/* group title (uses row_details styling vibe) */}
-                  <div className="project_row" style={{ cursor: "default" }}>
+                  <div
+                    className="project_row_expenses"
+                    style={{ cursor: "default" }}
+                  >
                     <div className="cell name">{title}</div>
-                    <div className="cell status"> </div>
+                    {/* <div className="cell status"> </div>
                     <div className="cell customer"> </div>
                     <div className="cell address"> </div>
                     <div className="row_details">
                       {list.length} {t.expensesPage.expenses}
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* group rows */}
                   {list.map((expense) => (
                     <div
-                      className="project_row"
+                      className="project_row expense_row"
                       key={expense.internalId}
                       role="button"
                       tabIndex={0}
