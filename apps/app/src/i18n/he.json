@@ -215,5 +215,20 @@
       "category": "קטגוריה",
       "selectCategory": "בחר קטגוריה"
     }
+  },
+  "expensesDetails": {
+    "expenseIdLabel": "מזהה הוצאה",
+    "deleteConfirm": "האם למחוק את ההוצאה?",
+    "amount": "סכום",
+    "currency": "מטבע",
+    "category": "קטגוריה",
+    "categoryPlaceholder": "לדוגמה: office",
+    "date": "תאריך",
+    "description": "תיאור",
+    "association": "שיוך",
+    "associationProject": "פרויקט",
+    "associationOther": "אחר",
+    "associationMultiple": "מספר פרויקטים",
+    "selectCategory": "בחר קטגוריה"
   }
 }

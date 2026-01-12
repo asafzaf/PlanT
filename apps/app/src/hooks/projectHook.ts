@@ -15,7 +15,7 @@ export const useProjectByInternalId = (internalId?: string) => {
   return useQuery<IProject, Error>({
     queryKey: ["projects", internalId],
     queryFn: () => ProjectService.getProjectByInternalId(internalId!),
-    enabled: !!internalId, // 👈 key line
+    enabled: !!internalId,
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
   });

@@ -11,6 +11,16 @@ export const useExpenses = () => {
   });
 };
 
+export const useExpenseByInternalId = (internalId?: string) => {
+  return useQuery<IExpense, Error>({
+    queryKey: ["expenses", internalId],
+    queryFn: () => ExpenseService.getExpenseByInternalId(internalId!),
+    enabled: !!internalId,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  });
+};
+
 export const useCreateExpense = () => {
   const queryClient = useQueryClient();
 
@@ -22,14 +32,31 @@ export const useCreateExpense = () => {
     },
   });
 };
+export const useUpdateExpense = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<IExpense, Error, IExpense>({
+    mutationFn: (expense) => ExpenseService.updateExpense(expense),
+    onSuccess: (updatedExpense) => {
+      queryClient.invalidateQueries({ queryKey: ["expenses"] });
+      queryClient.invalidateQueries({
+        queryKey: ["expenses", updatedExpense.internalId],
+      });
+      return updatedExpense;
+    },
+  });
+};
 
 export const useDeleteExpense = () => {
   const queryClient = useQueryClient();
 
   return useMutation<void, Error, string>({
     mutationFn: (internalId) => ExpenseService.deleteExpense(internalId),
-    onSuccess: () => {
+    onSuccess: (_, internalId) => {
       queryClient.invalidateQueries({ queryKey: ["expenses"] });
+      queryClient.invalidateQueries({
+        queryKey: ["expenses", internalId],
+      });
     },
   });
 };

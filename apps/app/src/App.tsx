@@ -15,6 +15,7 @@ import Expenses from "../src/components/Pages/Expenses";
 import ProjectDetails from "../src/components/Pages/ProjectDetails";
 import CreateProject from "../src/components/Pages/CreateProject";
 import CreateExpense from "src/components/Pages/CreateExpense";
+import ExpenseDetails from "./components/Pages/ExpenseDetails";
 import LoginPage from "../src/components/Pages/LoginPage";
 import { useI18n } from "./i18n/useI18n";
 import { useAuth } from "./context/AuthContext";
@@ -132,14 +133,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* <Route
+            <Route
               path="/expenses/:internalId"
               element={
                 <ProtectedRoute>
                   <ExpenseDetails t={t} />
                 </ProtectedRoute>
               }
-            /> */}
+            />
             {/* <Route path="/monthly" element={<ProtectedRoute><MonthlyPage /></ProtectedRoute>} /> */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

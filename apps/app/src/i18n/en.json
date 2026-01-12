@@ -215,5 +215,20 @@
       "category": "Category",
       "selectCategory": "Select a category"
     }
+  },
+  "expensesDetails": {
+    "expenseIdLabel": "Expense ID",
+    "deleteConfirm": "Are you sure you want to delete this expense?",
+    "amount": "Amount",
+    "currency": "Currency",
+    "category": "Category",
+    "categoryPlaceholder": "e.g. office",
+    "date": "Date",
+    "description": "Description",
+    "association": "Association",
+    "associationProject": "Project",
+    "associationOther": "Other",
+    "associationMultiple": "Multiple projects",
+    "selectCategory": "Select a category"
   }
 }
