@@ -151,11 +151,23 @@ export default function ExpensesPage({ t }: Props) {
             </div>
           ) : (
             projectGroupEntries.map(([projectId, list]) => {
-              // creates the projects title
-              const projectTotal = list.reduce(
-                (sum, e) => sum + (Number(e.amount) || 0),
-                0
+              // totals per currency
+              const totalsByCurrency = list.reduce<Record<string, number>>(
+                (acc, e) => {
+                  const cur = (e.currency ?? "").trim() || "—";
+                  const amt = Number(e.amount) || 0;
+                  acc[cur] = (acc[cur] ?? 0) + amt;
+                  return acc;
+                },
+                {}
               );
+
+              const totalsText = Object.entries(totalsByCurrency)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([cur, sum]) => `${formatAmount(sum)} ${cur}`)
+                .join("  |  ");
+
+              // creates the projects title
 
               const title =
                 projectId === "__multiple__"
@@ -254,9 +266,8 @@ export default function ExpensesPage({ t }: Props) {
                           onClick={(e) => e.stopPropagation()}
                           role="presentation"
                         >
-                          <div className="cell name">
-                            {formatAmount(projectTotal)}{" "}
-                            {list[0]?.currency ?? ""}
+                          <div className="cell name totalText">
+                            {totalsText}
                           </div>
                           <div className="cell date" />
                         </div>

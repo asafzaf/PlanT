@@ -1398,3 +1398,12 @@ main {
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 8px;
 }
+:root[dir="rtl"] .totalText {
+  direction: ltr;
+  display: flex;
+  justify-content: end;
+}
+:root[dir="ltr"] .totalText {
+  display: flex;
+  justify-content: start;
+}
