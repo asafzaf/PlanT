@@ -6,7 +6,7 @@ type ContentProps = {
 
 export default function MainContent({ children }: ContentProps) {
   return (
-    <main>
+    <main className="main_scroll">
       <div className="main_container">{children}</div>
     </main>
   );

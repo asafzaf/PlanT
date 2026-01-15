@@ -73,16 +73,8 @@ function App() {
         </button>
       </Nav>
       <div className="main_content">
-        <Header name={pageTitle}>
-          {/* <button
-            className="lang_toggle"
-            onClick={toggleLang}
-            aria-label="Toggle language"
-          >
-            <span className="lang_icon">🌐</span>
-            <span className="lang_text">{t.toggle}</span>
-          </button> */}
-        </Header>
+        <Header name={pageTitle}></Header>
+
         <MainContent>
           <Routes>
             <Route
