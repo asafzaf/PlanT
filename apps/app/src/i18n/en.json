@@ -179,7 +179,7 @@
     "totalLabel": "Total Expenses",
 
     "sections": {
-      "projects": "Projects",
+      "projects": "Total Expenses From Projects",
       "other": "Other"
     },
 
