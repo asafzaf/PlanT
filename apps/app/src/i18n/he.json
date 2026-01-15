@@ -170,5 +170,66 @@
     "address": "כתובת",
     "name": "שם",
     "deleteConfirm": "האם אתה בטוח שברצונך למחוק את הפרויקט הזה?"
+  },
+  "expensesPage": {
+    "searchPlaceholder": "חיפוש הוצאה...",
+    "clear": "נקה",
+    "newExpense": "הוצאה חדשה",
+    "expenses": "הוצאות",
+    "totalLabel": "סה״כ הוצאות",
+
+    "sections": {
+      "projects": "פרויקטים",
+      "other": "אחר"
+    },
+
+    "columns": {
+      "amount": "סכום",
+      "description": "תיאור",
+      "date": "תאריך"
+    },
+
+    "projectGroup": {
+      "projectPrefix": "פרויקט",
+      "multiple": "מספר פרויקטים"
+    },
+
+    "empty": {
+      "projects": "לא נמצאו הוצאות משויכות לפרויקטים.",
+      "other": "לא נמצאו הוצאות אחרות."
+    },
+    "categories": {
+      "software": "תוכנה",
+      "hardware": "חומרה",
+      "contractor": "קבלן",
+      "marketing": "שיווק",
+      "travel": "נסיעות",
+      "office": "משרד",
+      "utilities": "שירותים",
+      "general": "כללי",
+      "other": "אחר"
+    },
+    "form": {
+      "association": "שייכות",
+      "project": "פרויקט",
+      "selectProject": "בחר פרויקט",
+      "category": "קטגוריה",
+      "selectCategory": "בחר קטגוריה"
+    }
+  },
+  "expensesDetails": {
+    "expenseIdLabel": "מזהה הוצאה",
+    "deleteConfirm": "האם למחוק את ההוצאה?",
+    "amount": "סכום",
+    "currency": "מטבע",
+    "category": "קטגוריה",
+    "categoryPlaceholder": "לדוגמה: office",
+    "date": "תאריך",
+    "description": "תיאור",
+    "association": "שיוך",
+    "associationProject": "פרויקט",
+    "associationOther": "אחר",
+    "associationMultiple": "מספר פרויקטים",
+    "selectCategory": "בחר קטגוריה"
   }
 }

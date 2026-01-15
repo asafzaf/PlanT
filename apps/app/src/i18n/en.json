@@ -170,5 +170,66 @@
     "address": "Address",
     "name": "Name",
     "deleteConfirm": "Are you sure you want to delete this project?"
+  },
+  "expensesPage": {
+    "searchPlaceholder": "Search expenses...",
+    "clear": "Clear",
+    "newExpense": "New expense",
+    "expenses": "expenses",
+    "totalLabel": "Total Expenses",
+
+    "sections": {
+      "projects": "Projects",
+      "other": "Other"
+    },
+
+    "columns": {
+      "amount": "Amount",
+      "description": "Description",
+      "date": "Date"
+    },
+
+    "projectGroup": {
+      "projectPrefix": "Project",
+      "multiple": "Multiple projects"
+    },
+
+    "empty": {
+      "projects": "No project-related expenses found.",
+      "other": "No other expenses found."
+    },
+    "categories": {
+      "software": "Software",
+      "hardware": "Hardware",
+      "contractor": "Contractor",
+      "marketing": "Marketing",
+      "travel": "Travel",
+      "office": "Office",
+      "utilities": "Utilities",
+      "general": "General",
+      "other": "Other"
+    },
+    "form": {
+      "association": "Association",
+      "project": "Project",
+      "selectProject": "Select a project",
+      "category": "Category",
+      "selectCategory": "Select a category"
+    }
+  },
+  "expensesDetails": {
+    "expenseIdLabel": "Expense ID",
+    "deleteConfirm": "Are you sure you want to delete this expense?",
+    "amount": "Amount",
+    "currency": "Currency",
+    "category": "Category",
+    "categoryPlaceholder": "e.g. office",
+    "date": "Date",
+    "description": "Description",
+    "association": "Association",
+    "associationProject": "Project",
+    "associationOther": "Other",
+    "associationMultiple": "Multiple projects",
+    "selectCategory": "Select a category"
   }
 }

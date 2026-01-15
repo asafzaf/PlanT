@@ -11,8 +11,11 @@ import Nav from "./components/Nav";
 import MainContent from "./components/MainContent";
 import Dashboard from "../src/components/Pages/Dashborad";
 import Projects from "../src/components/Pages/Projects";
+import Expenses from "../src/components/Pages/Expenses";
 import ProjectDetails from "../src/components/Pages/ProjectDetails";
 import CreateProject from "../src/components/Pages/CreateProject";
+import CreateExpense from "src/components/Pages/CreateExpense";
+import ExpenseDetails from "./components/Pages/ExpenseDetails";
 import LoginPage from "../src/components/Pages/LoginPage";
 import { useI18n } from "./i18n/useI18n";
 import { useAuth } from "./context/AuthContext";
@@ -70,16 +73,8 @@ function App() {
         </button>
       </Nav>
       <div className="main_content">
-        <Header name={pageTitle}>
-          {/* <button
-            className="lang_toggle"
-            onClick={toggleLang}
-            aria-label="Toggle language"
-          >
-            <span className="lang_icon">🌐</span>
-            <span className="lang_text">{t.toggle}</span>
-          </button> */}
-        </Header>
+        <Header name={pageTitle}></Header>
+
         <MainContent>
           <Routes>
             <Route
@@ -114,8 +109,30 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* <Route path="/expenses" element={<ProtectedRoute><ExpensesPage /></ProtectedRoute>} /> */}
-            {/* <Route path="/income" element={<ProtectedRoute><IncomePage /></ProtectedRoute>} /> */}
+            <Route
+              path="/expenses"
+              element={
+                <ProtectedRoute>
+                  <Expenses t={t} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/expenses/new"
+              element={
+                <ProtectedRoute>
+                  <CreateExpense t={t} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/expenses/:internalId"
+              element={
+                <ProtectedRoute>
+                  <ExpenseDetails t={t} />
+                </ProtectedRoute>
+              }
+            />
             {/* <Route path="/monthly" element={<ProtectedRoute><MonthlyPage /></ProtectedRoute>} /> */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
