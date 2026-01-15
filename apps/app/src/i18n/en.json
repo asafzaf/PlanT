@@ -180,7 +180,8 @@
 
     "sections": {
       "projects": "Total Expenses From Projects",
-      "other": "Other"
+      "other": "Other",
+      "project": "Project"
     },
 
     "columns": {

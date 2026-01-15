@@ -185,9 +185,7 @@ export default function CreateExpense({ t }: Props) {
                 isFieldInvalid("association") ? "input_invalid" : undefined
               }
             >
-              <option value="project">
-                {t.expensesPage.sections.projects}
-              </option>
+              <option value="project">{t.expensesPage.sections.project}</option>
               <option value="other">{t.expensesPage.sections.other}</option>
             </select>
           </div>

@@ -180,7 +180,8 @@
 
     "sections": {
       "projects": "סך הכל הוצאות מכל הפרויקטים",
-      "other": "אחר"
+      "other": "אחר",
+      "project": "פרויקט"
     },
 
     "columns": {
