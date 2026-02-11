@@ -1,5 +1,11 @@
 export interface IPaymentMethod {
-  methodType: 'bank_transfer' | 'paypal' | 'stripe' | 'cash' | 'check' | 'other';
+  methodType:
+    | "bank_transfer"
+    | "paypal"
+    | "stripe"
+    | "cash"
+    | "check"
+    | "other";
   details?: string; // e.g., account number, PayPal email, etc.
 }
 
@@ -9,6 +15,7 @@ export interface IIncomeUpdateDTO {
   receivedDate?: Date;
   paymentMethod?: IPaymentMethod;
   invoiceNumber?: string;
+  category?: IIncome["category"];
 }
 
 export interface IIncomeCreateDTO {
@@ -20,28 +27,29 @@ export interface IIncomeCreateDTO {
   receivedDate: Date;
   paymentMethod?: string;
   invoiceNumber?: string;
+  category?: IIncome["category"];
 }
 
 export interface IIncome {
   internalId: string;
   projectId: string; // Reference to Project
   userId: string; // Who received it
-  
+
   amount: number;
   currency: string;
   description?: string;
-  category: 'payment' | 'deposit' | 'bonus' | 'refund' | 'other';
-  
+  category: "payment" | "deposit" | "bonus" | "refund" | "other";
+
   // Payment details
   receivedDate: Date;
   paymentMethod?: IPaymentMethod;
   invoiceNumber?: string;
   transactionId?: string;
-  
+
   // Tax tracking
   isTaxable: boolean;
   taxAmount?: number;
-  
+
   createdAt: Date;
   updatedAt: Date;
 }

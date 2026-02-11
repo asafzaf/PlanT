@@ -52,7 +52,7 @@ export default function Nav({ name, description, t, children }: NavProps) {
           </NavLink>
 
           <NavLink
-            to="/income"
+            to="/incomes"
             className={({ isActive }) =>
               isActive ? "nav_link nav_link--active" : "nav_link"
             }

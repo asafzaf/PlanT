@@ -3,13 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Trash2 } from "lucide-react";
 
 import type { Dictionary } from "../../i18n/i18n";
-import type { IExpense } from "@shared/types";
+import type { IIncome } from "@shared/types";
 
 import {
-  useExpenseByInternalId,
-  useUpdateExpense,
-  useDeleteExpense,
-} from "../../hooks/expenseHook";
+  useIncomeByInternalId,
+  useUpdateIncome,
+  useDeleteIncome,
+} from "../../hooks/incomeHook";
 
 type Props = { t: Dictionary };
 
@@ -17,23 +17,23 @@ type FormState = {
   amount: string;
   currency: string;
   description: string;
-  expenseDate: string; // "YYYY-MM-DD"
-  category: IExpense["category"] | "";
+  receivedDate: string; // "YYYY-MM-DD"
+  category: IIncome["category"] | "";
 };
 
-export default function ExpenseDetails({ t }: Props) {
+export default function IncomeDetails({ t }: Props) {
   const navigate = useNavigate();
   const { internalId } = useParams<{ internalId: string }>();
 
-  const deleteMutation = useDeleteExpense();
-  const updateMutation = useUpdateExpense();
+  const deleteMutation = useDeleteIncome();
+  const updateMutation = useUpdateIncome();
 
   const {
-    data: expense,
+    data: income,
     isLoading,
     error,
     refetch,
-  } = useExpenseByInternalId(internalId);
+  } = useIncomeByInternalId(internalId);
 
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState<FormState | null>(null);
@@ -53,67 +53,52 @@ export default function ExpenseDetails({ t }: Props) {
   const formatMoney = (amount: number, currency: string) =>
     `${Number(amount).toLocaleString()} ${currency ?? ""}`;
 
-  const associationLabel = (e: IExpense): string => {
-    const allocs = e.projectAllocations ?? [];
-    if (!allocs.length) return t.expensesDetails?.associationOther ?? "Other";
-    if (allocs.length === 1)
-      return `${t.expensesDetails?.associationProject ?? "Project"}: ${
-        allocs[0].projectId
-      }`;
-    return (
-      t.expensesDetails?.associationMultiple ??
-      `Multiple projects (${allocs.length})`
-    );
-  };
-
   const categories = useMemo(() => {
-    const map = t.expensesPage?.categories;
-    if (!map) return [] as IExpense["category"][];
-
-    return Object.keys(map) as IExpense["category"][];
+    const map = t.incomesPage?.categories;
+    if (!map) return [] as IIncome["category"][];
+    return Object.keys(map) as IIncome["category"][];
   }, [t]);
 
   // ---- mapping ----
-  const toForm = (e: IExpense): FormState => ({
+  const toForm = (e: IIncome): FormState => ({
     amount: String(e.amount ?? ""),
     currency: e.currency ?? "LSD",
     description: e.description ?? "",
-    expenseDate: e.expenseDate ? toDateInputValue(e.expenseDate) : "",
+    receivedDate: e.receivedDate ? toDateInputValue(e.receivedDate) : "",
     category: e.category ?? "",
   });
 
-  const toUpdatedExpense = (e: IExpense, f: FormState): IExpense => ({
+  const toUpdatedIncome = (e: IIncome, f: FormState): IIncome => ({
     ...e,
     amount: Number(f.amount),
     currency: f.currency,
     description: f.description,
-    expenseDate: dateInputToDate(f.expenseDate),
-    category: f.category as IExpense["category"], // you may keep string if your IExpense.category is string
+    receivedDate: dateInputToDate(f.receivedDate),
+    category: f.category as IIncome["category"], // you may keep string if your IIncome.category is string
   });
 
   // ---- state/flags ----
   const isDirty = useMemo(() => {
-    if (!expense || !form) return false;
+    if (!income || !form) return false;
 
     const original = {
-      amount: String(expense.amount ?? ""),
-      currency: expense.currency ?? "USD",
-      description: expense.description ?? "",
-      expenseDate: expense.expenseDate
+      amount: String(income.amount ?? ""),
+      currency: income.currency ?? "LSD",
+      description: income.description ?? "",
+      receivedDate: income.receivedDate
         ? (() => {
-            const d = new Date(expense.expenseDate);
+            const d = new Date(income.receivedDate);
             const y = d.getFullYear();
             const m = String(d.getMonth() + 1).padStart(2, "0");
             const day = String(d.getDate()).padStart(2, "0");
             return `${y}-${m}-${day}`;
           })()
         : "",
-      category: expense.category ?? "",
+      category: income.category ?? "",
     };
 
     return JSON.stringify(original) !== JSON.stringify(form);
-  }, [expense, form]);
-
+  }, [income, form]);
   const canSave = useMemo(() => {
     if (!form) return false;
 
@@ -124,14 +109,14 @@ export default function ExpenseDetails({ t }: Props) {
       amountOk &&
       form.currency.trim() !== "" &&
       form.description.trim() !== "" &&
-      form.expenseDate.trim() !== "" &&
+      form.receivedDate.trim() !== "" &&
       form.category.trim() !== ""
     );
   }, [form]);
 
   const startEdit = () => {
-    if (!expense) return;
-    setForm(toForm(expense));
+    if (!income) return;
+    setForm(toForm(income));
     setIsEditing(true);
   };
 
@@ -141,10 +126,10 @@ export default function ExpenseDetails({ t }: Props) {
   };
 
   const saveEdit = async () => {
-    if (!expense || !form) return;
+    if (!income || !form) return;
 
     try {
-      const updated = toUpdatedExpense(expense, form);
+      const updated = toUpdatedIncome(income, form);
       await updateMutation.mutateAsync(updated); // ✅ matches your hook
       setIsEditing(false);
       setForm(null);
@@ -154,49 +139,50 @@ export default function ExpenseDetails({ t }: Props) {
   };
 
   const onDelete = async () => {
+    console.log("Delete clicked for internalId:", internalId); // Debug log
     if (!internalId) return;
 
     const confirmed = window.confirm(
-      t.expensesDetails?.deleteConfirm ??
-        "Are you sure you want to delete this expense?",
+      t.incomesDetails?.deleteConfirm ??
+        "Are you sure you want to delete this income?",
     );
     if (!confirmed) return;
 
     try {
       await deleteMutation.mutateAsync(internalId);
-      navigate("/expenses");
+      navigate("/incomes");
     } catch {
       // shown via deleteMutation.error
     }
   };
 
   // ---- loading/error states ----
-  if (isLoading) return <div>Loading expense...</div>;
+  if (isLoading) return <div>Loading income...</div>;
 
   if (error) {
     return (
       <div style={{ padding: 16 }}>
-        <h2>Failed to load expense</h2>
+        <h2>Failed to load income</h2>
         <p>{(error as Error).message}</p>
 
         <div style={{ display: "flex", gap: 8 }}>
           <button className="btn" onClick={() => refetch()}>
             Try again
           </button>
-          <button className="btn" onClick={() => navigate("/expenses")}>
-            Back to expenses
+          <button className="btn" onClick={() => navigate("/incomes")}>
+            Back to incomes
           </button>
         </div>
       </div>
     );
   }
 
-  if (!expense) {
+  if (!income) {
     return (
       <div style={{ padding: 16 }}>
-        <h2>Expense not found</h2>
-        <button className="btn" onClick={() => navigate("/expenses")}>
-          Back to expenses
+        <h2>Income not found</h2>
+        <button className="btn" onClick={() => navigate("/incomes")}>
+          Back to incomes
         </button>
       </div>
     );
@@ -208,10 +194,12 @@ export default function ExpenseDetails({ t }: Props) {
       {/* Top bar */}
       <div className="details_topbar">
         <div style={{ flex: 1 }}>
-          <div className="details_title">{expense.description ?? "-"}</div>
+          <div className="details_title">
+            {t.incomesDetails?.description ?? "-"}
+          </div>
           <div className="details_subtitle">
-            {t.expensesDetails?.expenseIdLabel ?? "Expense ID"}:{" "}
-            {expense.internalId}
+            {t.incomesDetails?.incomeIdLabel ?? "Income ID"}:{" "}
+            {income.internalId}
           </div>
         </div>
 
@@ -266,12 +254,12 @@ export default function ExpenseDetails({ t }: Props) {
           {/* Amount */}
           <div className="details_item">
             <div className="details_label">
-              {t.expensesDetails?.amount ?? "Amount"}
+              {t.incomesDetails?.amount ?? "Amount"}
             </div>
 
             {!isEditing ? (
               <div className="details_value">
-                {formatMoney(expense.amount, expense.currency)}
+                {formatMoney(income.amount, income.currency)}
               </div>
             ) : (
               <input
@@ -288,11 +276,11 @@ export default function ExpenseDetails({ t }: Props) {
           {/* Currency */}
           <div className="details_item">
             <div className="details_label">
-              {t.expensesDetails?.currency ?? t.common?.currency ?? "Currency"}
+              {t.incomesDetails?.currency ?? t.common?.currency ?? "Currency"}
             </div>
 
             {!isEditing ? (
-              <div className="details_value">{expense.currency ?? "-"}</div>
+              <div className="details_value">{income.currency ?? "-"}</div>
             ) : (
               <select
                 className="input"
@@ -311,11 +299,11 @@ export default function ExpenseDetails({ t }: Props) {
           {/* Category */}
           <div className="details_item">
             <div className="details_label">
-              {t.expensesDetails?.category ?? "Category"}
+              {t.incomesDetails?.category ?? "Category"}
             </div>
 
             {!isEditing ? (
-              <div className="details_value">{expense.category ?? "-"}</div>
+              <div className="details_value">{income.category ?? "-"}</div>
             ) : (
               <select
                 className="input"
@@ -332,12 +320,12 @@ export default function ExpenseDetails({ t }: Props) {
                 }
               >
                 <option value="">
-                  {t.expensesDetails?.selectCategory ?? "Select category"}
+                  {t.incomesDetails?.selectCategory ?? "Select category"}
                 </option>
 
                 {categories.map((c) => (
                   <option key={c} value={c}>
-                    {t.expensesPage.categories[c]}
+                    {t.incomesPage.categories[c]}
                   </option>
                 ))}
               </select>
@@ -347,21 +335,21 @@ export default function ExpenseDetails({ t }: Props) {
           {/* Date */}
           <div className="details_item">
             <div className="details_label">
-              {t.expensesDetails?.date ?? "Date"}
+              {t.incomesDetails?.date ?? "Date"}
             </div>
 
             {!isEditing ? (
               <div className="details_value">
-                {new Date(expense.expenseDate).toLocaleDateString()}
+                {new Date(income.receivedDate).toLocaleDateString()}
               </div>
             ) : (
               <input
                 className="input"
                 type="date"
-                value={form?.expenseDate ?? ""}
+                value={form?.receivedDate ?? ""}
                 onChange={(e) =>
                   setForm((s) =>
-                    s ? { ...s, expenseDate: e.target.value } : s,
+                    s ? { ...s, receivedDate: e.target.value } : s,
                   )
                 }
               />
@@ -372,11 +360,11 @@ export default function ExpenseDetails({ t }: Props) {
         {/* Description */}
         <div className="details_section">
           <div className="details_label">
-            {t.expensesDetails?.description ?? "Description"}
+            {t.incomesDetails?.description ?? "Description"}
           </div>
 
           {!isEditing ? (
-            <div className="details_value">{expense.description ?? "-"}</div>
+            <div className="details_value">{income.description ?? "-"}</div>
           ) : (
             <textarea
               className="input"
@@ -389,14 +377,6 @@ export default function ExpenseDetails({ t }: Props) {
           )}
         </div>
 
-        {/* Association (read-only, from expense itself) */}
-        <div className="details_section">
-          <div className="details_label">
-            {t.expensesDetails?.association ?? "Association"}
-          </div>
-          <div className="details_value">{associationLabel(expense)}</div>
-        </div>
-
         {/* Delete error */}
         {deleteMutation.error ? (
           <div style={{ padding: 12, color: "crimson" }}>
@@ -406,7 +386,7 @@ export default function ExpenseDetails({ t }: Props) {
       </div>
 
       <div className="details_bottombar">
-        <button className="btn" onClick={() => navigate("/expenses")}>
+        <button className="btn" onClick={() => navigate("/incomes")}>
           ← {t.common?.back ?? "Back"}
         </button>
       </div>

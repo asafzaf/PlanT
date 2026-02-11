@@ -149,6 +149,7 @@
     "address": "Address",
     "login": "Login",
     "password": "Password",
+    "items": "Items",
 
     "budget": "Budget",
     "currency": "Currency",
@@ -231,6 +232,71 @@
     "associationProject": "Project",
     "associationOther": "Other",
     "associationMultiple": "Multiple projects",
+    "selectCategory": "Select a category"
+  },
+  "incomesPage": {
+    "searchPlaceholder": "Search incomes...",
+    "clear": "Clear",
+    "newIncome": "New income",
+    "incomes": "incomes",
+
+    "loadingProjects": "Loading projects...",
+    "errorProjects": "Error loading projects: {msg}",
+
+    "categoryLabel": "Category",
+    "categoryAll": "All categories",
+
+    "columns": {
+      "amount": "Amount",
+      "description": "Description",
+      "date": "Date"
+    },
+
+    "projectGroup": {
+      "projectPrefix": "Project",
+      "unknown": "Unknown project"
+    },
+
+    "categories": {
+      "payment": "Payment",
+      "deposit": "Deposit",
+      "bonus": "Bonus",
+      "refund": "Refund",
+      "other": "Other"
+    },
+
+    "noDescription": "Income",
+    "invoiceShort": "Inv#",
+    "txShort": "Tx#",
+    "taxable": "Taxable",
+    "notTaxable": "Not taxable",
+
+    "totalLabel": "Total",
+
+    "form": {
+      "association": "Association",
+      "project": "Project",
+      "selectProject": "Select a project",
+      "category": "Category",
+      "selectCategory": "Select a category"
+    },
+
+    "sections": {
+      "project": "Project",
+      "other": "Other",
+      "projects": "Projects"
+    }
+  },
+
+  "incomesDetails": {
+    "incomeIdLabel": "Income ID",
+    "deleteConfirm": "Are you sure you want to delete this income?",
+    "amount": "Amount",
+    "currency": "Currency",
+    "category": "Category",
+    "categoryPlaceholder": "e.g. payment",
+    "date": "Date",
+    "description": "Description",
     "selectCategory": "Select a category"
   }
 }

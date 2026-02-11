@@ -149,6 +149,7 @@
     "address": "כתובת",
     "login": "התחברות",
     "password": "סיסמה",
+    "items": "פריטים",
 
     "budget": "תקציב",
     "currency": "מטבע",
@@ -232,5 +233,70 @@
     "associationOther": "אחר",
     "associationMultiple": "מספר פרויקטים",
     "selectCategory": "בחר קטגוריה"
+  },
+  "incomesPage": {
+    "searchPlaceholder": "חיפוש הכנסות...",
+    "clear": "נקה",
+    "newIncome": "הכנסה חדשה",
+    "incomes": "הכנסות",
+
+    "loadingProjects": "טוען פרויקטים...",
+    "errorProjects": "שגיאה בטעינת פרויקטים: {msg}",
+
+    "categoryLabel": "קטגוריה",
+    "categoryAll": "כל הקטגוריות",
+
+    "columns": {
+      "amount": "סכום",
+      "description": "תיאור",
+      "date": "תאריך"
+    },
+
+    "projectGroup": {
+      "projectPrefix": "פרויקט",
+      "unknown": "פרויקט לא ידוע"
+    },
+
+    "categories": {
+      "payment": "תשלום",
+      "deposit": "מקדמה",
+      "bonus": "בונוס",
+      "refund": "החזר",
+      "other": "אחר"
+    },
+
+    "noDescription": "הכנסה",
+    "invoiceShort": "חשב׳",
+    "txShort": "עס׳",
+    "taxable": "חייב במס",
+    "notTaxable": "לא חייב במס",
+
+    "totalLabel": "סה\"כ",
+
+    "form": {
+      "association": "שייכות",
+      "project": "פרויקט",
+      "selectProject": "בחר פרויקט",
+      "category": "קטגוריה",
+      "selectCategory": "בחר קטגוריה"
+    },
+
+    "sections": {
+      "projects": "פרויקטים",
+      "project": "פרויקט",
+      "other": "אחר"
+    }
+  },
+
+  "incomesDetails": {
+    "incomeIdLabel": "מזהה הכנסה",
+    "deleteConfirm": "האם את/ה בטוח/ה שברצונך למחוק את ההכנסה הזו?",
+    "amount": "סכום",
+    "currency": "מטבע",
+    "category": "קטגוריה",
+    "categoryPlaceholder": "לדוגמה: תשלום",
+    "date": "תאריך",
+    "description": "תיאור",
+    "selectCategory": "בחר/י קטגוריה"
   }
 }
