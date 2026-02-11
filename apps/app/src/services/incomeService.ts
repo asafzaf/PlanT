@@ -29,7 +29,6 @@ export const IncomeService = {
   },
 
   deleteIncome: async (internalId: string) => {
-    console.log("Attempting to delete income with internalId:", internalId); // Debug log
     await authApi.delete(`/incomes/${internalId}`);
   },
 };

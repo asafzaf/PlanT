@@ -50,7 +50,6 @@ export const useUpdateIncome = () => {
 
 export const useDeleteIncome = () => {
   const queryClient = useQueryClient();
-  console.log("deleteIncome hook called"); // Debug log
 
   return useMutation<void, Error, string>({
     mutationFn: (internalId) => IncomeService.deleteIncome(internalId),
