@@ -93,8 +93,9 @@ export class IncomeController {
     next: NextFunction
   ) => {
     try {
-      const { incomeId } = req.params;
-      await this.incomeService.deleteIncome(incomeId);
+      const { internalId } = req.params;
+      console.log(internalId);
+      await this.incomeService.deleteIncome(internalId);
       res.status(204).send();
     } catch (err) {
       next(err);
