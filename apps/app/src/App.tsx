@@ -12,13 +12,16 @@ import MainContent from "./components/MainContent";
 import Dashboard from "../src/components/Pages/Dashborad";
 import Projects from "../src/components/Pages/Projects";
 import Expenses from "../src/components/Pages/Expenses";
+import Incomes from "../src/components/Pages/Incomes";
 import ProjectDetails from "../src/components/Pages/ProjectDetails";
 import CreateProject from "../src/components/Pages/CreateProject";
 import CreateExpense from "src/components/Pages/CreateExpense";
+import CreateIncome from "src/components/Pages/CreateIncome";
 import ExpenseDetails from "./components/Pages/ExpenseDetails";
 import LoginPage from "../src/components/Pages/LoginPage";
 import { useI18n } from "./i18n/useI18n";
 import { useAuth } from "./context/AuthContext";
+import IncomeDetails from "./components/Pages/IncomeDetails";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -39,7 +42,7 @@ function App() {
     if (matchPath("/projects/:internalId", pathname))
       return t.nav.projectDetails ?? "Project details";
     if (matchPath("/expenses", pathname)) return t.nav.expenses;
-    if (matchPath("/income", pathname)) return t.nav.incomes;
+    if (matchPath("/incomes", pathname)) return t.nav.incomes;
     if (matchPath("/monthly", pathname)) return t.nav.monthly;
 
     return t.nav.dashboard;
@@ -130,6 +133,30 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ExpenseDetails t={t} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/incomes"
+              element={
+                <ProtectedRoute>
+                  <Incomes t={t} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/incomes/new"
+              element={
+                <ProtectedRoute>
+                  <CreateIncome t={t} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/incomes/:internalId"
+              element={
+                <ProtectedRoute>
+                  <IncomeDetails t={t} />
                 </ProtectedRoute>
               }
             />
