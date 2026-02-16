@@ -139,7 +139,6 @@ export default function IncomeDetails({ t }: Props) {
   };
 
   const onDelete = async () => {
-    console.log("Delete clicked for internalId:", internalId); // Debug log
     if (!internalId) return;
 
     const confirmed = window.confirm(
